@@ -1,3 +1,11 @@
+### Custom ###
+
+# Code coverage files
+src/tests/**/[Cc]overage*.*
+
+# Developer's machine configurations
+.configs.yml
+
 # Created by https://www.gitignore.io/api/git,linux,macos,windows,sonarqube,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=git,linux,macos,windows,sonarqube,visualstudio,visualstudiocode
 
@@ -65,6 +73,7 @@ Temporary Items
 # https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
 # Sonar Scanner working directories
 .sonar/
+.sonarqube/
 .scannerwork/
 
 # http://www.sonarlint.org/commandline/

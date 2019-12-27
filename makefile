@@ -17,7 +17,7 @@ cbt: rebuild
 	@dotnet test -v q --no-build /p:CollectCoverage=true /p:Threshold=${threshold} /p:ThresholdType=line /p:CoverletOutputFormat=opencover
 	@echo Done.
 
-id ?= viaja-net-test-application
+id ?= viaja-net-job-application
 sonar:
 	@echo Preparing files to Sonarqube...
 	@dotnet sonarscanner begin /k:${id} /d:sonar.login=admin /d:sonar.password=admin /d:sonar.language="cs" /d:sonar.cs.opencover.reportsPaths="**/**opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs" /d:sonar.verbose=false
@@ -28,4 +28,5 @@ sonar:
 purge:
 	@echo Purging bin and obj folders...
 	@find ./src/ -name "bin" -o -name "obj" | xargs rm -drf
+	@find ./src/tests -name "bin" -o -name "obj" | xargs rm -drf
 	@echo Done.
