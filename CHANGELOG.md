@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.6] - 2019-12-28
+### Added
+- JSHint directives on vn.analytics.js.
+
+### Changed
+- Analytics script now has Apache (version 2.0) licensing.
+
+### Fixed
+- Unused wrapper variable on vn-analytics.js.
+
 ## [0.0.5] - 2019-12-28
 ### Added
 - Remaning HTML structure [(backbone), but still have work to do].
