@@ -4,17 +4,16 @@
 
 rebuild:
 	@echo Cleaning...
-	@find ./src/ -name "bin" -o -name "obj" | xargs rm -drf
 	@dotnet clean -v q > /dev/null
 	@echo Building \(up to 5 threads\)...
 	@dotnet build -p:maxcpucount=5 -v q > /dev/null
 	@echo Done.
 
 # Minimum line code coverage threshold of 90% (changeable from parameter).
-threshold ?= 90
+threshold ?= 50
 cbt: rebuild
 	@printf "\nTesting...\n\n"
-	@dotnet test -v q --no-build /p:CollectCoverage=true /p:Threshold=${threshold} /p:ThresholdType=line /p:CoverletOutputFormat=opencover
+	@dotnet test -v q --no-build /p:CollectCoverage=true /p:Threshold=${threshold} /p:ThresholdType=method /p:CoverletOutputFormat=opencover
 	@echo Done.
 
 id ?= viaja-net-job-application

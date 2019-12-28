@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.4] - 2019-12-28
+### Added
+- Remaining HTML pages (backbone);
+- Unit tests for AnalyticsPayload class;
+- CORS configuration on Startup;
+- RESTful documentation scratches;
+- API call on main front-end script.
+
+### Changed
+- Decreased code coverage threshold to 50% and changed analysis method to "method";
+- Assets naming;
+
 ## [0.0.3] - 2019-12-27
 ### Added
 - Analytics script, responsible for server hits with client information;

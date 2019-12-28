@@ -17,13 +17,28 @@ namespace ViajaNet.JobApplication.Host.Web
 {
     public class Startup
     {
+        private const string LocalHtmlFilePolicy = "LocalHtmlFilePolicy";
+
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration) => this.Configuration = configuration;
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors()
+            services.AddCors(options =>
+                {
+                    // When requests are made from file protocol, in some browsers, the origin is 'null'.
+                    const string LocalFileOrigin = "null";
+
+                    options.AddPolicy(LocalHtmlFilePolicy, x =>
+                    {
+                        x.WithOrigins(LocalFileOrigin)
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .Build();
+                    });
+                })
                 .AddOptions()
                 .AddResponseCaching()
                 .AddResponseCompression()
@@ -52,11 +67,11 @@ namespace ViajaNet.JobApplication.Host.Web
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage()
+                    .UseCors(LocalHtmlFilePolicy);
             }
             else
             {
-                app.UseCors();
                 app.UseHsts();
             }
 

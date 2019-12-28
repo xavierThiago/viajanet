@@ -17,9 +17,11 @@ namespace ViajaNet.JobApplication.Host.Web.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> CreateAnalyticalHitAsync([FromBody] object data)
+        public async Task<IActionResult> CreateAnalyticalHitAsync([FromBody] AnalyticsPayload data)
         {
-            return await Task.Run(() => new JsonResult(new { status = true }));
+            data.AddIp(this.HttpContext.Connection.RemoteIpAddress);
+
+            return await Task.Run(() => new CreatedResult(this.HttpContext.Request.Path, data));
         }
 
         [HttpGet]

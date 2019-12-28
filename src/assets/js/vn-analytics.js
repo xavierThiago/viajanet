@@ -18,20 +18,22 @@ var vn = (function (env) {
      * @summary Elements rcurrently rendered on page load.
      */
     const elements = {
-        title: env.document.querySelector("title")
+        title: env.document.querySelector("title"),
+        button: env.document.querySelector("input")
     };
 
     /**
      * @summary Query string data.
      */
     const page = (function () {
-        let params = (env.location.search || "").substring(1).split("&");
+        const search = (env.location.search || "").substring(1);
+        const params = search ? search.split("&") : [];
         let vars = [];
 
         if (params.length) {
             vars = params.reduce(function (map, items) {
-                var pairs = items.split("=");
-                var key = pairs[0];
+                const pairs = items.split("=");
+                const key = pairs[0];
 
                 // If the pair doesn't already exist as a key in the object, map it.
                 if (!map.hasOwnProperty(key)) {
@@ -45,16 +47,16 @@ var vn = (function (env) {
         }
 
         /**
-         * @summary Creates page information necessary for an analytics hit on the server.
+         * @summary Creates page information, necessary for an analytics hit on the server.
          * @returns {Object} Page information
          */
         function createPageInformationMap() {
             let userAgent = defaults.userAgentPattern.exec(env.navigator.userAgent);
-            let version = userAgent[2];
-            let name = userAgent[1];
+            const version = userAgent[2];
+            const name = userAgent[1];
 
             return {
-                name: elements.title.text || "",
+                pageName: elements.title.text || "",
                 vendor: {
                     name: name,
                     version: version
@@ -66,21 +68,27 @@ var vn = (function (env) {
         return createPageInformationMap();
     }());
 
+    async function hit() {
+        return await fetch(`${defaults.api.schema}://${defaults.api.host}:${defaults.api.port}/${defaults.api.pathname}`, {
+            method: "POST",
+            credentials: "omit",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(page)
+        });
+    }
+
+    elements.button.addEventListener("click", (e) => hit());
+
     return {
         analytics: {
             hit: async () => {
                 console.debug(page);
 
-                // return await fetch(`${defaults.api.schema}://${defaults.api.host}/${defaults.api.pathname}`, {
-                //     method: "POST",
-                //     headers: {
-                //         "Content-Type": "application/json"
-                //     },
-                //     body: JSON.stringify(page)
-                // });
+                return hit();
             }
-        },
-        getPageInformation: () => { return page; }
+        }
     };
 
 }(this));
