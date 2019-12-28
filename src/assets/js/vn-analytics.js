@@ -34,13 +34,14 @@ var vn = (function (env) {
             vars = params.reduce(function (map, items) {
                 const pairs = items.split("=");
                 const key = pairs[0];
+                const value = pairs[1];
 
                 // If the pair doesn't already exist as a key in the object, map it.
                 if (!map.hasOwnProperty(key)) {
                     map[key] = [];
                 }
 
-                map[key].push(pairs[1]);
+                map[key].push(value);
 
                 return map;
             }, {});
@@ -51,12 +52,13 @@ var vn = (function (env) {
          * @returns {Object} Page information
          */
         function createPageInformationMap() {
-            let userAgent = defaults.userAgentPattern.exec(env.navigator.userAgent);
-            const version = userAgent[2];
-            const name = userAgent[1];
+            const userAgent = defaults.userAgentPattern.exec(env.navigator.userAgent);
+            const version = userAgent[2] || "";
+            const name = userAgent[1] || "";
+            const pageName = elements.title.text || "";
 
             return {
-                pageName: elements.title.text || "",
+                pageName: pageName,
                 vendor: {
                     name: name,
                     version: version
@@ -79,16 +81,12 @@ var vn = (function (env) {
         });
     }
 
-    elements.button.addEventListener("click", (e) => hit());
-
     return {
         analytics: {
-            hit: async () => {
-                console.debug(page);
-
-                return hit();
-            }
+            hit: hit
         }
     };
 
-}(this));
+}(this))
+    .analytics
+    .hit();

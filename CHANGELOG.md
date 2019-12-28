@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5] - 2019-12-28
+### Added
+- Remaning HTML structure [(backbone), but still have work to do].
+
+### Changed
+- Analytics script now hits on page load.
+
 ## [0.0.4] - 2019-12-28
 ### Added
 - Remaining HTML pages (backbone);
