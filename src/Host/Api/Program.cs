@@ -20,13 +20,29 @@ namespace ViajaNet.JobApplication.Host.Web
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging(options =>
+                {
+                    options.ClearProviders();
+                    options.AddDebug();
+                    options.AddConsole();
+                })
                 .UseKestrel(options =>
                 {
                     options.ListenAnyIP(5000, server =>
-                      {
-                          server.Protocols = HttpProtocols.Http1AndHttp2;
-                      });
+                    {
+                        server.Protocols = HttpProtocols.Http1AndHttp2;
+                    });
+
+                    // TODO: implement HTTPS on Docker container.
+                    /* options.ListenAnyIP(5001, server =>
+                    {
+                        server.Protocols = HttpProtocols.Http1AndHttp2;
+
+                        server.UseHttps();
+                    }); */
                 })
+                // TODO: implement HTTPS on Docker container.
+                .UseUrls("http://+:5000")
                 .UseStartup<Startup>();
     }
 }

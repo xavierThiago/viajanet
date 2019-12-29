@@ -25,7 +25,8 @@ namespace ViajaNet.JobApplication.Host.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
+            services.AddLogging()
+                .AddCors(options =>
                 {
                     // When requests are made from file protocol, in some browsers, the origin is 'null'.
                     const string LocalFileOrigin = "null";

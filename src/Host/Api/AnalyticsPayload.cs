@@ -7,15 +7,31 @@ using Newtonsoft.Json;
 
 namespace ViajaNet.JobApplication.Host.Web.Controllers
 {
+    /// <summary>
+    /// Create an instance of <see cref="AnalyticsPayload"/>.
+    /// </summary>
+    /// <remarks>Analytics API receives it as a payload.</remarks>
     public class AnalyticsPayload
     {
+        /// <summary>
+        /// Client IP.
+        /// </summary>
+        /// <value>IP information is collected on server.</value>
         [JsonProperty("ip")]
         public string IP { get; private set; }
 
+        /// <summary>
+        /// Page name.
+        /// </summary>
+        /// <value>HTML title retrieved from the client.</value>
         [Required]
         [JsonProperty("pageName")]
         public string PageName { get; set; }
 
+        /// <summary>
+        /// Vendor information
+        /// </summary>
+        /// <value>Contains browser's name and version.</value>
         [Required]
         [JsonProperty("vendor")]
         public VendorPayload Vendor { get; set; }
@@ -23,6 +39,11 @@ namespace ViajaNet.JobApplication.Host.Web.Controllers
         /* [JsonProperty("p")]
         public IEnumerable<IDictionary<string, IEnumerable<string>>> P { get; set; } */
 
+        /// <summary>
+        /// Create an instance of <see cref="AnalyticsPayload"/>, with a <paramref name="pageName"/> and <paramref name="vendor"/>.
+        /// </summary>
+        /// <param name="pageName">Page name.</param>
+        /// <param name="vendor">Browser information.</param>
         public AnalyticsPayload(string pageName, VendorPayload vendor/* ,
                                     IEnumerable<IDictionary<string, IEnumerable<string>>> parameters */)
         {
@@ -68,17 +89,34 @@ namespace ViajaNet.JobApplication.Host.Web.Controllers
             this.IP = ipAddress.ToString();
         }
 
+        /// <summary>
+        /// Create an instance of <see cref="VendorPayload"/>.
+        /// </summary>
+        /// <remarks>Vendor information inside analytics payload.</remarks>
         public class VendorPayload
         {
             private static readonly Regex _versionPattern = new Regex(@"^\d(?:\.\d+)+(\w+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
+            /// <summary>
+            /// Name.
+            /// </summary>
+            /// <value>Browser name.</value>
             [Required]
             [JsonProperty("name")]
             public string Name { get; set; }
 
+            /// <summary>
+            /// Version.
+            /// </summary>
+            /// <value>Browser version.</value>
             [JsonProperty("version")]
             public string Version { get; set; }
 
+            /// <summary>
+            /// Create an instance of <see cref="VendorPayload"/> with a <paramref name="name"/> and <paramref name="version"/>.
+            /// </summary>
+            /// <param name="name">Browser name.</param>
+            /// <param name="version">Browser version.</param>
             public VendorPayload(string name, string version)
             {
                 if (name == null)

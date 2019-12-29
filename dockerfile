@@ -4,7 +4,7 @@ WORKDIR /app
 COPY ./ ./
 RUN dotnet publish src/Host/Api/ViajaNet.JobApplication.Host.Api.csproj -c Release -o /publish
 
-FROM mcr.microsoft.com/dotnet/core/runtime:2.2-alpine AS runner
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-alpine AS runner
 WORKDIR /out
 
 COPY --from=builder ./publish ./
