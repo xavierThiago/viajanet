@@ -12,6 +12,10 @@ namespace ViajaNet.JobApplication.Host.Worker
     /// <remarks><see cref="IScheduler"/> will use it to perform consumption of queue provider.</remarks>
     public static class SchedulerFactory
     {
+        /// <summary>
+        /// Creates a <see cref="IScheduler"/> instance with basic configuration.
+        /// </summary>
+        /// <returns>A <see cref="Task{IScheduler}"/> containing the scheduler handler.</returns>
         public static Task<IScheduler> CreateAsync()
         {
             // Initialization properties.
