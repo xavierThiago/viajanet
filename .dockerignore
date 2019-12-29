@@ -5,6 +5,7 @@ src/tests/**/[Cc]overage*.*
 **/**/appsettings*.json
 !**/**/appsettings.Development.json
 !**/**/appsettings.Release.json
+*~
 
 *.md
 

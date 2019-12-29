@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.12] - 2019-12-29
+### Added
+- NPM configuration;
+- Grunt tasks to cover .js and .css minification and bundling;
+- Dockerignore file.
+
 ## [0.0.11] - 2019-12-29
 ### Added
 - Dockerignore file;

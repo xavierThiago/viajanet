@@ -1,0 +1,32 @@
+{
+  "name": "viajanet-job-application",
+  "version": "1.0.0",
+  "description": "ViajaNet's senior fullstack job application project.",
+  "main": "index.js",
+  "devDependencies": {
+    "google-closure-compiler": "^20191111.0.0",
+    "grunt": "^1.0.4",
+    "grunt-contrib-csslint": "^2.0.0",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-jshint": "^2.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xavierThiago/viajanet.git"
+  },
+  "keywords": [
+    "viajanet",
+    "c#",
+    "job-application",
+    "js"
+  ],
+  "author": "Thiago J. Xavier",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/xavierThiago/viajanet/issues"
+  },
+  "homepage": "https://github.com/xavierThiago/viajanet#readme"
+}
