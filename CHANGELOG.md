@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.8] - 2019-12-29
+### Added
+- API's Dockerfile.
+
 ## [0.0.7] - 2019-12-28
 ### Changed
 - Some enhancements on analytics script.
