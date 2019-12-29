@@ -1,6 +1,14 @@
 # Disclaimer: Linux/macOS enviroment only.
 
-.PHONY: rebuild, cbt, pack, sonar, purge
+.PHONY: init, rebuild, cbt, pack, sonar, purge
+
+init:
+	@printf 'Installing dependencies, testing and distributing assets...\n\n'
+	@rm -dfr ./dist
+	@npm install
+
+dist: init
+	@grunt test && grunt dist
 
 rebuild:
 	@echo Cleaning...
