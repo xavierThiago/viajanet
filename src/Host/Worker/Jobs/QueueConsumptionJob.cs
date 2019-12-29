@@ -13,8 +13,8 @@ namespace ViajaNet.JobApplication.Host.Worker
         /// <summary>
         /// Job trigger information.
         /// </summary>
-        /// <remarks>Every fifteen seconds, between 09:00 and 18:00, everyday.</remarks>
-        public const string CronTrigger = "0/15 * 9-18 * * ?";
+        /// <remarks>Every ten seconds, between 09:00 and 18:00, everyday.</remarks>
+        public const string CronTrigger = "0/10 * 09-18 * * ?";
 
         /// <summary>
         /// Job process that <see cref="Quartz.IScheduler"/> will execute.

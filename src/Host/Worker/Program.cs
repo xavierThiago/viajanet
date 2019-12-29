@@ -1,7 +1,5 @@
 ﻿using Quartz;
-using Quartz.Impl;
 using System;
-using System.Collections.Specialized;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,42 +9,6 @@ namespace ViajaNet.JobApplication.Host.Worker
     {
         private static readonly AutoResetEvent _locker = new AutoResetEvent(false);
         private static IScheduler _scheduler;
-
-        public static async Task Main(string[] args)
-        {
-            CreateCancellingEvent();
-
-            _scheduler = await CreateSchedulerAsync();
-
-            await _scheduler.Start();
-
-            var job = JobBuilder.Create<QueueConsumptionJob>()
-                .WithIdentity("consumption-job", "queue")
-                .Build();
-
-            var trigger = TriggerBuilder.Create()
-                .WithIdentity("consumption-trigger", "queue")
-                .StartNow()
-                .WithCronSchedule(QueueConsumptionJob.CronTrigger)
-                .Build();
-
-            // Tell quartz to schedule the job using our trigger
-            await _scheduler.ScheduleJob(job, trigger);
-            await Console.Out.WriteLineAsync("Queue consumption started.");
-
-            _locker.WaitOne();
-        }
-
-        private static Task<IScheduler> CreateSchedulerAsync()
-        {
-            // Initialization properties.
-            var factory = new StdSchedulerFactory(new NameValueCollection
-                {
-                    { "quartz.serializer.type", "binary" }
-                });
-
-            return factory.GetScheduler();
-        }
 
         private static void CreateCancellingEvent()
         {
@@ -62,6 +24,30 @@ namespace ViajaNet.JobApplication.Host.Worker
 
                 Console.Out.WriteLine("Done.");
             };
+        }
+
+        public static async Task Main(string[] args)
+        {
+            CreateCancellingEvent();
+
+            _scheduler = await SchedulerFactory.CreateAsync();
+
+            await _scheduler.Start();
+
+            var job = JobBuilder.Create<QueueConsumptionJob>()
+                .WithIdentity("consumption-job", "queue")
+                .Build();
+
+            var trigger = TriggerBuilder.Create()
+                .WithIdentity("consumption-trigger", "queue")
+                .WithCronSchedule(QueueConsumptionJob.CronTrigger)
+                .Build();
+
+            await _scheduler.ScheduleJob(job, trigger);
+
+            await Console.Out.WriteLineAsync("Queue consumption started.");
+
+            _locker.WaitOne();
         }
     }
 }
