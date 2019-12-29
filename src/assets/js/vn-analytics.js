@@ -36,11 +36,10 @@
     };
 
     /**
-     * @summary Elements rcurrently rendered on page load.
+     * @summary Elements currently rendered on page load.
      */
     const elements = {
-        title: env.document.querySelector("title"),
-        button: env.document.querySelector("input")
+        title: env.document.querySelector("title")
     };
 
     /**
@@ -91,14 +90,18 @@
         return createPageInformationMap();
     }());
 
+    /**
+     * @summary Sends to server analytics information of current page.
+     * @returns {Promise} A promise containing data about the server response.
+     */
     async function hit() {
-        return await fetch(`${defaults.api.schema}://${defaults.api.host}:${defaults.api.port}/${defaults.api.pathname}`, {
+        return await env.fetch(`${defaults.api.schema}://${defaults.api.host}:${defaults.api.port}/${defaults.api.pathname}`, {
             method: "POST",
             credentials: "omit",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(page)
+            body: env.JSON.stringify(page)
         });
     }
 
@@ -110,4 +113,6 @@
 
 }(this))
     .analytics
-    .hit();
+    .hit()
+    .then(() => console.info("Analytics hit sent sucessfully."))
+    .catch(() => console.warn("API is not running."));
