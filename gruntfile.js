@@ -1,17 +1,14 @@
 module.exports = function (grunt) {
     "use strict";
 
-    require("google-closure-compiler").grunt(grunt);
+    require("google-closure-compiler")
+        .grunt(grunt);
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
-        concat: {
-            options: {
-                separator: ";"
-            },
-            dist: {
-                src: ["src/**/*.js"],
-                dest: "dist/js/<%= pkg.name %>.js"
+        csslint: {
+            strict: {
+                src: ["src/assets/css/*.css", "!src/assets/css/vendor/*.css"]
             }
         },
         cssmin: {
@@ -21,7 +18,7 @@ module.exports = function (grunt) {
                     cwd: "src/assets/css",
                     src: ["*.css", "!*.min.css", "!vendor/*.min.css"],
                     dest: "dist/css",
-                    ext: ".min.css"
+                    ext: ".<%= grunt.template.today(+new Date()) %>.min.css"
                 }]
             }
         },
@@ -37,30 +34,17 @@ module.exports = function (grunt) {
                 }
             }
         },
-        uglify: {
-            options: {
-                banner: "/*! <%= pkg.name %> <%= grunt.template.today(+new Date()) %> */\n"
-            },
-            dist: {
-                files: {
-                    "dist/<%= pkg.name %>.min.js": ["<%= concat.dist.dest %>"]
-                }
-            }
-        },
         jshint: {
-            files: ["gruntfile.js", "src/**/*.js", "test/**/*.js"],
+            files: ["gruntfile.js", "src/assets/js/*.js", "test/**/*.js"],
             options: {
                 globals: {
-                    jQuery: true,
-                    console: true,
-                    module: true,
-                    document: true,
                     esversion: 8
                 }
             }
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-contrib-jshint");
 

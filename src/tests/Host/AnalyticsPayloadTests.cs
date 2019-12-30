@@ -1,4 +1,3 @@
-using System;
 using System.Net;
 using ViajaNet.JobApplication.Host.Api;
 using Xunit;

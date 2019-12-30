@@ -7,7 +7,8 @@ init:
 	@rm -dfr ./dist
 	@npm install
 
-dist: init
+dist:
+	@rm -dfr ./dist
 	@grunt test && grunt dist
 
 rebuild:
@@ -33,7 +34,8 @@ sonar:
 	@echo Done.
 
 purge:
-	@echo Purging bin and obj folders...
+	@echo Purging dist, bin and obj folders...
+	@rm -drf ./dist
 	@find ./src/ -name "bin" -o -name "obj" | xargs rm -drf
 	@find ./src/tests -name "bin" -o -name "obj" | xargs rm -drf
 	@echo Done.

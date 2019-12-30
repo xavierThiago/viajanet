@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.15] - 2019-12-30
+### Changed
+- Also deleting dist folder on Makefile's "dist" and "purge" rules.
+
+### Fixed
+- Main .css file path;
+- Updated Newtonsoft.Json version to solve MSBuild conflict;
+- Grunt tasks were wrongly outputing compiled files.
+
+### Removed
+- Unused Grunt tasks;
+- Unecessary package references.
+
 ## [0.0.14] - 2019-12-29
 ### Added
 - Application layer (backbone);
