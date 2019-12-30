@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace ViajaNet.JobApplication.Host.Web
+namespace ViajaNet.JobApplication.Host.Api
 {
     public class Startup
     {

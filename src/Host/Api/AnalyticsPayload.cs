@@ -5,7 +5,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
-namespace ViajaNet.JobApplication.Host.Web.Controllers
+namespace ViajaNet.JobApplication.Host.Api
 {
     /// <summary>
     /// Create an instance of <see cref="AnalyticsPayload"/>.

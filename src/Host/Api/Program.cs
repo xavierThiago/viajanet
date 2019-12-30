@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace ViajaNet.JobApplication.Host.Web
+namespace ViajaNet.JobApplication.Host.Api
 {
     public class Program
     {

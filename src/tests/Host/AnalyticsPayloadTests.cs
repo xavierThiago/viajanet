@@ -1,6 +1,6 @@
 using System;
 using System.Net;
-using ViajaNet.JobApplication.Host.Web.Controllers;
+using ViajaNet.JobApplication.Host.Api;
 using Xunit;
 
 namespace ViajaNet.JobApplication.Tests

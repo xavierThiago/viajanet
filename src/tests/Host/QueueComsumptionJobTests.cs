@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Moq;
 using Quartz;
-using ViajaNet.JobApplication.Host.Web.Controllers;
 using ViajaNet.JobApplication.Host.Worker;
 using Xunit;
 
