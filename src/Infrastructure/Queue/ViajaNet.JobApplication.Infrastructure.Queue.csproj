@@ -3,9 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="RabbitMq.Client" Version="5.*" />
+  </ItemGroup>
 
 </Project>

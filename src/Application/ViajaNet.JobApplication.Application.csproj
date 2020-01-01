@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\ViajaNet.JobApplication.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

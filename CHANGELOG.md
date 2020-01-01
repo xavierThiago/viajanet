@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.16] - 2020-01-01
+### Added
+- Initial queue provider project;
+- Initial application service project.
+
 ## [0.0.15] - 2019-12-30
 ### Changed
 - Also deleting dist folder on Makefile's "dist" and "purge" rules.
