@@ -1,7 +1,14 @@
-﻿using Quartz;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.DependencyInjection;
+using Quartz;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ViajaNet.JobApplication.Infrastructure.Queue;
+using RabbitMQ.Client;
+using System.IO;
+using System.Collections.Generic;
 
 namespace ViajaNet.JobApplication.Host.Worker
 {
@@ -10,31 +17,59 @@ namespace ViajaNet.JobApplication.Host.Worker
         private static readonly AutoResetEvent _locker = new AutoResetEvent(false);
         private static IScheduler _scheduler;
 
-        private static void CreateCancellingEvent()
+        private static IServiceProvider ConfigureContainer()
         {
-            Console.CancelKeyPress += (sender, e) =>
+            var configBuilder = new ConfigurationBuilder()
+                                    .SetBasePath(Directory.GetCurrentDirectory())
+                                    .AddJsonFile($"appsettings.{"Development"}.json", optional: true);
+            var configuration = configBuilder.Build();
+
+            return new ServiceCollection()
+                            .AddOptions()
+                            .Configure<QueueConfiguration>(options => configuration.GetSection("PubSub:RabbitMq").Bind(options))
+                            .AddSingleton<IQueueFactory, QueueProviderFactory>()
+                            .AddSingleton<IQueueProvider, QueueService>()
+                            .BuildServiceProvider();
+        }
+
+        private static void ConfigureEvents()
+        {
+            Console.CancelKeyPress += async (sender, e) =>
             {
                 e.Cancel = true;
 
-                Console.Out.WriteLine("\nWaiting for pending jobs to complete...");
+                await Console.Out.WriteLineAsync("\nWaiting for pending jobs to complete...");
 
                 // Wait for any job completion first.
-                _scheduler.Shutdown(true);
+                await _scheduler.Shutdown(true);
+
+                // Releasing the main thread.
                 _locker.Set();
 
-                Console.Out.WriteLine("Done.");
+                await Console.Out.WriteLineAsync("Done.");
             };
         }
 
         public static async Task Main(string[] args)
         {
-            CreateCancellingEvent();
+            ConfigureEvents();
+
+            var container = ConfigureContainer();
+            var queue = container.GetService<IQueueProvider>();
 
             _scheduler = await SchedulerFactory.CreateAsync();
 
             await _scheduler.Start();
 
             var job = JobBuilder.Create<QueueConsumptionJob>()
+                .UsingJobData(new JobDataMap(new Dictionary<string, IQueueProvider>
+                {
+                    {"queueProvider", queue}
+                }))
+                /* .SetJobData(new JobDataMap(new Dictionary<string, IQueueProvider>
+                {
+                    {"queueProvider", queue}
+                })) */
                 .WithIdentity("consumption-job", "queue")
                 .Build();
 

@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2020-01-02
+### Added
+- Debug profile to console project (Worker);
+- License.txt to be compatible with NuGet packaging;
+- .nuspec of queue infrastructure (it can be packable and referenced through NuGet);
+- Some configuration on appSettings.json;
+- Queue consumption job implementation;
+- Primitive DI container implementation (will be transported in a separated file later);
+- Created an interface to the queue factory (dependency injection);
+
+### Changed
+- Queue service class no longer receives a channel from DI container. Now, it will be constructed with each new instance;
+- Better format (markdown) on API resources descriptions (request/response).
+
 ## [0.0.18] - 2020-01-01
 ### Added
 - Queue service implementation;

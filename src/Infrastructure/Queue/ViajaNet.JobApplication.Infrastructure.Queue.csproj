@@ -4,6 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsPackable>true</IsPackable>
+
+    <!-- Nuget configuration -->
+    <NuspecFile>./.nuspec</NuspecFile>
   </PropertyGroup>
 
   <ItemGroup>

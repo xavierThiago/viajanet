@@ -15,12 +15,14 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
         private readonly bool _queueDeclared = false;
         private bool _disposed = false;
 
-        public QueueService([FromServices] IModel channel)
+        public QueueService([FromServices] IQueueFactory factory)
         {
-            if (channel == null)
+            if (factory == null)
             {
-                throw new InvalidOperationException($"Could not resolve {nameof(IModel)} type from DI container.");
+                throw new InvalidOperationException($"Could not resolve {nameof(factory)} type from DI container.");
             }
+
+            var channel = factory.CreateChannel();
 
             if (!channel.IsOpen)
             {

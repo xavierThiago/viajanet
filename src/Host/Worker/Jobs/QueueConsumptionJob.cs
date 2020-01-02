@@ -1,6 +1,9 @@
 using System;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Quartz;
+using ViajaNet.JobApplication.Infrastructure.Queue;
 
 namespace ViajaNet.JobApplication.Host.Worker
 {
@@ -23,7 +26,29 @@ namespace ViajaNet.JobApplication.Host.Worker
         /// <returns>A <see cref="Task"/> of the current job execution.</returns>
         public async Task Execute(IJobExecutionContext context)
         {
-            await Console.Out.WriteLineAsync($"Job \"{context.JobDetail.Key}\" started.");
+            if (context.MergedJobDataMap.TryGetValue("queueProvider", out object jobProvider))
+            {
+                var provider = jobProvider as IQueueProvider;
+
+                if (provider == null)
+                {
+                    await Console.Out.WriteLineAsync($"Job \"{context.JobDetail.Key}\" started.");
+
+                    return;
+                }
+
+                provider.Shift("analytics", async (sender, e) =>
+                {
+                    var json = Encoding.UTF8.GetString(e.Body);
+                    var hit = JsonConvert.DeserializeObject<object>(json);
+
+                    await Console.Out.WriteAsync("Queue consumption succeeded.");
+                });
+            }
+            else
+            {
+                await Console.Out.WriteLineAsync($"Job \"{context.JobDetail.Key}\" started.");
+            }
         }
     }
 }

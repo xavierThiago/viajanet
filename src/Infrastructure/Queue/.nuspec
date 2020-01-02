@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+    <metadata>
+        <!-- The identifier that must be unique within the hosting gallery -->
+        <id>ViajaNet.Infrastructure.Providers.Queue</id>
+
+        <!-- The package version number that is used when resolving dependencies -->
+        <version>1.0.0-rc</version>
+
+        <!-- Authors contain text that appears directly on the gallery -->
+        <authors>Thiago J. Xavier</authors>
+
+        <!--
+            Owners are typically nuget.org identities that allow gallery
+            users to easily find other packages by the same owners.
+        -->
+        <owners>Thiago J. Xavier</owners>
+
+        <!-- Project URL provides a link for the gallery -->
+        <projectUrl>https://gitlab.com/xavierthiago/viajanet</projectUrl>
+
+        <!-- The icon is used in Visual Studio's package manager UI -->
+        <iconUrl>https://avatars0.githubusercontent.com/u/16418179</iconUrl>
+
+        <!-- License information is displayed on the gallery -->
+        <license type="file">LICENSE.txt</license>
+
+        <!--
+            If true, this value prompts the user to accept the license when
+            installing the package.
+        -->
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+
+        <!-- Any details about this particular release -->
+        <releaseNotes>Initial version of a simple queue interface, using RabbitMQ.</releaseNotes>
+
+        <!--
+            The description can be used in package manager UI. Note that the
+            nuget.org gallery uses information you add in the portal.
+        -->
+        <description>Simple RabbitMQ pub/sub interface.</description>
+
+        <!-- Copyright information -->
+        <copyright>Copyright ©2019 Thiago J. Xavier</copyright>
+
+        <!-- Tags appear in the gallery and can be used for tag searches -->
+        <tags>queue pubsub rabbitmq messaging</tags>
+    </metadata>
+
+    <!-- A readme.txt to display when the package is installed -->
+    <files>
+        <file src="../../../README.md" target="" />
+        <file src="../../../LICENSE.txt" target="" />
+    </files>
+</package>
