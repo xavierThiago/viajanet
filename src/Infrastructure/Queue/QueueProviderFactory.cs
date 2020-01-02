@@ -8,7 +8,8 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
     public class QueueProviderFactory : IDisposable
     {
         private bool _disposed = false;
-        private readonly IConnection _connection;
+        private readonly ConnectionFactory _factory;
+        private readonly Lazy<IConnection> _connection;
 
         public QueueProviderFactory([FromServices] IOptions<QueueConfiguration> options)
         {
@@ -17,11 +18,9 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
                 throw new ArgumentNullException(nameof(options));
             }
 
-            var connection = default(ConnectionFactory);
-
             if (options.Value.Uri != null)
             {
-                connection = new ConnectionFactory
+                this._factory = new ConnectionFactory
                 {
                     Uri = options.Value.Uri
                 };
@@ -48,7 +47,7 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
                     throw new ArgumentException("Can not create a queue provider connection without a hostname.", nameof(options));
                 }
 
-                connection = new ConnectionFactory()
+                this._factory = new ConnectionFactory()
                 {
                     UserName = options.Value.Username,
                     Password = options.Value.Password,
@@ -58,30 +57,33 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
                 };
             }
 
-            this._connection = connection.CreateConnection();
-
-            if (!this._connection.IsOpen)
+            this._connection = new Lazy<IConnection>(() =>
             {
-                throw new InvalidOperationException("Could not stabilish a connection with the queue provider.");
-            }
+                return this._factory.CreateConnection();
+            });
         }
+
+        ~QueueProviderFactory() => this.Dispose(false);
 
         protected virtual void Dispose(bool disposing)
         {
             if (!this._disposed)
             {
-                this._connection.Dispose();
+                this._connection.Value.Dispose();
                 this._disposed = true;
             }
         }
 
-        public IModel CreateChannel() => this._connection.CreateModel();
+        public IModel CreateChannel()
+        {
+            if (!this._connection.Value.IsOpen)
+            {
+                throw new InvalidOperationException("Could not stabilish a connection with the queue provider.");
+            }
+
+            return this._connection.Value.CreateModel();
+        }
 
         public void Dispose() => this.Dispose(true);
-
-        ~QueueProviderFactory()
-        {
-            Dispose(false);
-        }
     }
 }

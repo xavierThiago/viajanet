@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.18] - 2020-01-01
+### Added
+- Queue service implementation;
+- Proper disposing of queue provider factory.
+
+### Changed
+- Queue provider factory to lazy load a singleton connection.
+
+### Removed
+- Async methods of queue provider (for now, it's not necessary as things are simple and fast).
+
 ## [0.0.17] - 2020-01-01
 ### Added
 - Queue provider factory;

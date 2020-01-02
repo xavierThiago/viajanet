@@ -1,13 +1,17 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using RabbitMQ.Client.Events;
 
 namespace ViajaNet.JobApplication.Infrastructure.Queue
 {
-    public interface IQueueProvider
+    public interface IQueueProvider : IDisposable
     {
-        Task<object> PushAsync<TValue>(string topic, TValue data);
-        Task<object> PushAsync<TValue>(string topic, TValue data, CancellationToken cancellationToken);
-        Task<object> ShiftAsync(string topic);
-        Task<object> ShiftAsync(string topic, CancellationToken cancellationToken);
+        void Push<TValue>(TValue data)
+            where TValue : class, new();
+        void Push<TValue>(string topic, TValue data)
+            where TValue : class, new();
+        void Shift(EventHandler<BasicDeliverEventArgs> handler);
+        void Shift(string topic, EventHandler<BasicDeliverEventArgs> handler);
     }
 }
