@@ -66,10 +66,6 @@ namespace ViajaNet.JobApplication.Host.Worker
                 {
                     {"queueProvider", queue}
                 }))
-                /* .SetJobData(new JobDataMap(new Dictionary<string, IQueueProvider>
-                {
-                    {"queueProvider", queue}
-                })) */
                 .WithIdentity("consumption-job", "queue")
                 .Build();
 

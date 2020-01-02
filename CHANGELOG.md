@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2020-01-02
+### Added
+- Swagger generation tool;
+- Added ViajaNet's logo;
+- Added some Swagger metadada on analytics controller.
+
+### Fixed
+- .nuspec icon not being generated correctly;
+- Typo on vn-analytics.js API address.
+
 ## [0.1.0] - 2020-01-02
 ### Added
 - Debug profile to console project (Worker);

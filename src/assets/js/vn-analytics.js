@@ -28,7 +28,7 @@
     let defaults = {
         userAgentPattern: /(MSIE|Trident|(?!Gecko.+)Firefox|(?!AppleWebKit.+Chrome.+)Safari(?!.+Edge)|(?!AppleWebKit.+)Chrome(?!.+Edge)|(?!AppleWebKit.+Chrome.+Safari.+)Edge|AppleWebKit(?!.+Chrome|.+Safari)|Gecko(?!.+Firefox))(?: |\/)([\d\.apre]+)/i,
         api: {
-            schema: "http",
+            scheme: "http",
             host: "localhost",
             port: "5000",
             pathname: "api/v1/analytics"

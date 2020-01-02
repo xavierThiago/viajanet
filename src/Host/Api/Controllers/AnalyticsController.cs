@@ -11,7 +11,15 @@ namespace ViajaNet.JobApplication.Host.Api.Controllers
     [AllowAnonymous]
     public class AnalyticsController : ControllerBase
     {
+        /// <summary>
+        /// Creates an analytics hit on server.
+        /// </summary>
+        /// <remarks>The information will be processed in a pub/sub structure.</remarks>
+        /// <response code="201">Analytics hit created.</response>
+        /// <response code="400">Invalid values were encoutered.</response>
+        /// <response code="500">Oops! An unexpected error occurred. Analytics hit was not saved. Please, try again.</response>
         [HttpPost]
+        [MapToApiVersion("1")]
         [Consumes("application/json")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -31,7 +39,15 @@ namespace ViajaNet.JobApplication.Host.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// Retrieves an analytics information by IP or page name.
+        /// </summary>
+        /// <remarks>All information are processed by CouchDB.</remarks>
+        /// <response code="200">Analytics information was found.</response>
+        /// <response code="400">Invalid values were encoutered.</response>
+        /// <response code="500">Oops! An unexpected error occurred. Analytics hit was not saved. Please, try again.</response>
         [HttpGet]
+        [MapToApiVersion("1")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]

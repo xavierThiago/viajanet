@@ -25,12 +25,20 @@ cbt: rebuild
 	@dotnet test -v q --no-build /p:CollectCoverage=true /p:Threshold=${threshold} /p:ThresholdType=method /p:CoverletOutputFormat=opencover
 	@echo Done.
 
-id ?= viaja-net-job-application
+id ?= viajanet-job-application
 sonar:
 	@echo Preparing files to Sonarqube...
 	@dotnet sonarscanner begin /k:${id} /d:sonar.login=admin /d:sonar.password=admin /d:sonar.language="cs" /d:sonar.cs.opencover.reportsPaths="**/**opencover.xml" /d:sonar.coverage.exclusions="**Tests*.cs" /d:sonar.verbose=false
 	@dotnet test /p:MaxCpuCount=5 /p:CollectCoverage=true /p:CoverletOutputFormat=opencover -v q
 	@dotnet sonarscanner end /d:sonar.login=admin /d:sonar.password=admin
+	@echo Done.
+
+pack: cbt
+	@printf "\nDeleting previous .nupkg...\n"
+	@rm -drf ./dist/nupkg
+	@echo Done.
+	@printf "\nPacking...\n\n"
+	@dotnet pack -c Release --no-build -o ../../../dist/nupkg -v q
 	@echo Done.
 
 purge:

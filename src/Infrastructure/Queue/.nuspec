@@ -20,7 +20,7 @@
         <projectUrl>https://gitlab.com/xavierthiago/viajanet</projectUrl>
 
         <!-- The icon is used in Visual Studio's package manager UI -->
-        <iconUrl>https://avatars0.githubusercontent.com/u/16418179</iconUrl>
+        <icon>logo-viajanet.png</icon>
 
         <!-- License information is displayed on the gallery -->
         <license type="file">LICENSE.txt</license>
@@ -49,6 +49,7 @@
 
     <!-- A readme.txt to display when the package is installed -->
     <files>
+        <file src="../../assets/img/logo-viajanet.png" target="" />
         <file src="../../../README.md" target="" />
         <file src="../../../LICENSE.txt" target="" />
     </files>

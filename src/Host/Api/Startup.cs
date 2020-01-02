@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ViajaNet.JobApplication.Host.Api
 {
@@ -62,6 +63,27 @@ namespace ViajaNet.JobApplication.Host.Api
                 options.AssumeDefaultVersionWhenUnspecified = true;
                 options.ReportApiVersions = true;
             });
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info
+                {
+                    Title = "ViajaNet Analytics API",
+                    Version = "v1",
+                    Description = "Simple analytics collector API.",
+                    TermsOfService = "https://github.com/xavierThiago/viajanet",
+                    Contact = new Contact
+                    {
+                        Name = "Thiago J. Xavier",
+                        Email = "xavier.j.thiago@gmail.com"
+                    },
+                    License = new License
+                    {
+                        Name = "Apache 2.0",
+                        Url = "http://www.apache.org/licenses/LICENSE-2.0.html"
+                    }
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -79,6 +101,11 @@ namespace ViajaNet.JobApplication.Host.Api
             app.UseResponseCompression()
                 .UseResponseCaching()
                 .UseAuthentication()
+                .UseSwagger()
+                .UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "ViajaNet Analytics API");
+                })
                 .UseMvc();
         }
     }

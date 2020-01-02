@@ -13,8 +13,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.*" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.*" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.*" />
-    <!-- <PackageReference Include="Microsoft.Extensions.Options" Version="3.*" /> -->
-    <!-- <PackageReference Include="Microsoft.AspNetCore" Version="2.2.*" /> -->
     <PackageReference Include="Quartz" Version="3.*" />
     <PackageReference Include="RabbitMQ.Client" Version="5.*" />
   </ItemGroup>

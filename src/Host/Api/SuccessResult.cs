@@ -3,7 +3,8 @@ using Newtonsoft.Json;
 
 namespace ViajaNet.JobApplication.Host.Api
 {
-    public sealed class SuccessResult<TResult> where TResult : class
+    public sealed class SuccessResult<TResult>
+        where TResult : class
     {
         [JsonProperty("status")]
         public bool Status { get; } = true;
