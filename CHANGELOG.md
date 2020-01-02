@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.17] - 2020-01-01
+### Added
+- Queue provider factory;
+
+### Changed
+- Renamed some files.
+
+### Fixed
+- Package reference typo.
+
 ## [0.0.16] - 2020-01-01
 ### Added
 - Initial queue provider project;
