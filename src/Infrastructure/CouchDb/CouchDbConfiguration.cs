@@ -21,6 +21,18 @@ namespace ViajaNet.JobApplication.Infrastructure.CouchDb
         public string Password { get; set; }
 
         [JsonProperty("ConnectionString")]
-        public Uri ConnectionString { get; set; }
+        public Uri ConnectionString
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.Host) &&
+                        !string.IsNullOrEmpty(this.Port))
+                {
+                    return new Uri($"http://{this.Host}:{this.Port}/pools");
+                }
+
+                return default;
+            }
+        }
     }
 }

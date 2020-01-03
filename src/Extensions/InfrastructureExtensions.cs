@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ViajaNet.JobApplication.Infrastructure;
 using ViajaNet.JobApplication.Infrastructure.CouchDb;
 using ViajaNet.JobApplication.Infrastructure.Queue;
 
@@ -45,7 +46,10 @@ namespace ViajaNet.JobApplication.Extensions
             return services.AddOptions()
                 .Configure<CouchDbConfiguration>(options => configuration.GetSection(CouchDbConfigurationSection).Bind(options))
                 .AddSingleton<ICouchDbFactory, CouchDbFactory>()
-                .AddTransient<ICouchDbService, CouchDbService>();
+                .AddTransient<ICouchDbService, CouchDbService>()
+                // .AddTransient<ISqlServerService, object>()
+                .AddSingleton<IRepositoryCommand, RepositoryHandler>()
+                .AddSingleton<IRepositoryQuery, RepositoryHandler>();
         }
     }
 }

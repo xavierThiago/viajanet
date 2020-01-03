@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Application\Service\ViajaNet.JobApplication.Application.Service.csproj" />
     <ProjectReference Include="..\Infrastructure\CouchDb\ViajaNet.JobApplication.Infrastructure.CouchDb.csproj" />
     <ProjectReference Include="..\Infrastructure\Queue\ViajaNet.JobApplication.Infrastructure.Queue.csproj" />
+    <ProjectReference Include="..\Infrastructure\Handler\ViajaNet.JobApplication.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

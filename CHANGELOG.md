@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2020-01-03
+### Added
+- Repository handler that supports commands and queries;
+- Added configuration data on appSettings.json.
+
+### Fixed
+- CouchDbConfiguration error on connection string;
+
 ## [0.7.0] - 2020-01-03
 ### Added
 - CouchDb factory and service implementation;

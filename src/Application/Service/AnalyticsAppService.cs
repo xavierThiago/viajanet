@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ViajaNet.JobApplication.Application.Core;
+using ViajaNet.JobApplication.Infrastructure;
 using ViajaNet.JobApplication.Infrastructure.Queue;
 
 namespace ViajaNet.JobApplication.Application.Service
@@ -11,15 +12,31 @@ namespace ViajaNet.JobApplication.Application.Service
     public class AnalyticsAppService : IAnalyticsAppService
     {
         private readonly IQueueProvider _queueProvider;
+        private readonly IRepositoryCommand _commandHandler;
+        private readonly IRepositoryQuery _queryHandler;
 
-        public AnalyticsAppService([FromServices] IQueueProvider queueProvider)
+        public AnalyticsAppService([FromServices] IQueueProvider queueProvider,
+                                        [FromServices] IRepositoryCommand commandHandler,
+                                            [FromServices] IRepositoryQuery queryHandler)
         {
             if (queueProvider == null)
             {
-                throw new InvalidOperationException($"Could not resolve {nameof(queueProvider)} type from DI container.");
+                throw new InvalidOperationException($"Could not resolve {nameof(IQueueProvider)} type from DI container.");
+            }
+
+            if (commandHandler == null)
+            {
+                throw new InvalidOperationException($"Could not resolve {nameof(IRepositoryCommand)} type from DI container.");
+            }
+
+            if (queryHandler == null)
+            {
+                throw new InvalidOperationException($"Could not resolve {nameof(IRepositoryQuery)} type from DI container.");
             }
 
             this._queueProvider = queueProvider;
+            this._commandHandler = commandHandler;
+            this._queryHandler = queryHandler;
         }
 
         public Task CreateAsync(AnalyticsDto analyticsDto) => this.CreateAsync(analyticsDto, CancellationToken.None);

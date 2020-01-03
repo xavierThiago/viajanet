@@ -25,7 +25,7 @@ namespace ViajaNet.JobApplication.Host.Worker
             {
                 e.Cancel = true;
 
-                await Console.Out.WriteLineAsync("\nWaiting for pending jobs to complete...");
+                _ = Console.Out.WriteLineAsync("\nWaiting for pending jobs to complete...");
 
                 // Wait for any job completion first.
                 await _scheduler.Shutdown(true);
@@ -33,7 +33,7 @@ namespace ViajaNet.JobApplication.Host.Worker
                 // Releasing the main thread.
                 _locker.Set();
 
-                await Console.Out.WriteLineAsync("Done.");
+                _ = Console.Out.WriteLineAsync("Done.");
             };
         }
 
@@ -62,7 +62,7 @@ namespace ViajaNet.JobApplication.Host.Worker
 
             await _scheduler.ScheduleJob(job, trigger);
 
-            await Console.Out.WriteLineAsync("Queue consumption started.");
+            _ = Console.Out.WriteLineAsync("Queue consumption started.");
 
             _locker.WaitOne();
         }
