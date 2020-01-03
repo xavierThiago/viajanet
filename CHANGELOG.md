@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2020-01-03
+### Added
+- Application service layer contracts;
+- Transfer objects that will be used by the API.
+
+### Changed
+- Dependency injection through extensions pattern.
+
+### Removed
+- Unecessary environment appSettings.json files;
+- Namespace clean up.
+
 ## [0.3.0] - 2020-01-02
 ### Added
 - Get by ID operation on analytics controller.

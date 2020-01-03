@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Application\ViajaNet.JobApplication.Application.csproj" />
+    <ProjectReference Include="..\..\Extensions\ViajaNet.JobApplication.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

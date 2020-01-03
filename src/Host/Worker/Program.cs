@@ -1,14 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using ViajaNet.JobApplication.Infrastructure.Queue;
-using RabbitMQ.Client;
-using System.IO;
-using System.Collections.Generic;
+using ViajaNet.JobApplication.Extensions;
+using ViajaNet.JobApplication.Application;
 
 namespace ViajaNet.JobApplication.Host.Worker
 {
@@ -17,20 +15,10 @@ namespace ViajaNet.JobApplication.Host.Worker
         private static readonly AutoResetEvent _locker = new AutoResetEvent(false);
         private static IScheduler _scheduler;
 
-        private static IServiceProvider ConfigureContainer()
-        {
-            var configBuilder = new ConfigurationBuilder()
-                                    .SetBasePath(Directory.GetCurrentDirectory())
-                                    .AddJsonFile($"appsettings.{"Development"}.json", optional: true);
-            var configuration = configBuilder.Build();
-
-            return new ServiceCollection()
-                            .AddOptions()
-                            .Configure<QueueConfiguration>(options => configuration.GetSection("PubSub:RabbitMq").Bind(options))
-                            .AddSingleton<IQueueFactory, QueueProviderFactory>()
-                            .AddSingleton<IQueueProvider, QueueService>()
-                            .BuildServiceProvider();
-        }
+        private static IAnalyticsAppService CreateAppServiceContainer() => new ServiceCollection()
+                                                                            .AddViajaNetApplication()
+                                                                            .BuildServiceProvider()
+                                                                            .GetService<IAnalyticsAppService>();
 
         private static void ConfigureEvents()
         {
@@ -54,19 +42,18 @@ namespace ViajaNet.JobApplication.Host.Worker
         {
             ConfigureEvents();
 
-            var container = ConfigureContainer();
-            var queue = container.GetService<IQueueProvider>();
+            var service = CreateAppServiceContainer();
 
             _scheduler = await SchedulerFactory.CreateAsync();
 
             await _scheduler.Start();
 
             var job = JobBuilder.Create<QueueConsumptionJob>()
-                .UsingJobData(new JobDataMap(new Dictionary<string, IQueueProvider>
-                {
-                    {"queueProvider", queue}
-                }))
                 .WithIdentity("consumption-job", "queue")
+                .UsingJobData(new JobDataMap(new Dictionary<string, IAnalyticsAppService>
+                {
+                    {"appService", service}
+                }))
                 .Build();
 
             var trigger = TriggerBuilder.Create()

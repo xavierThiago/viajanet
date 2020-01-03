@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using ViajaNet.JobApplication.Extensions;
 
 namespace ViajaNet.JobApplication.Host.Api
 {
@@ -84,6 +78,8 @@ namespace ViajaNet.JobApplication.Host.Api
                     }
                 });
             });
+
+            services.AddViajaNetApplication();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
