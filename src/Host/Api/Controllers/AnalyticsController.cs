@@ -40,6 +40,28 @@ namespace ViajaNet.JobApplication.Host.Api.Controllers
         }
 
         /// <summary>
+        /// Retrieves an analytics information by ID.
+        /// </summary>
+        /// <remarks>All information are processed by CouchDB.</remarks>
+        /// <response code="200">Analytics information was found.</response>
+        /// <response code="400">Invalid values were encoutered.</response>
+        /// <response code="500">Oops! An unexpected error occurred. Analytics hit was not saved. Please, try again.</response>
+        [HttpGet("{id}")]
+        [MapToApiVersion("1")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetAnalyticsById([FromRoute] string id)
+        {
+            return await Task.Run(() =>
+            {
+                return new JsonResult(new SuccessResult<object>("Analytics hit found.", new { ip = "127.0.0.0" }));
+            });
+        }
+
+        /// <summary>
         /// Retrieves an analytics information by IP or page name.
         /// </summary>
         /// <remarks>All information are processed by CouchDB.</remarks>
@@ -57,7 +79,7 @@ namespace ViajaNet.JobApplication.Host.Api.Controllers
         {
             return await Task.Run(() =>
             {
-                return new JsonResult(new SuccessResult<object>("Analytics hit created succesfully.", new { ip = "127.0.0.0" }));
+                return new JsonResult(new SuccessResult<object>("Analytics hit(s) found.", new { ip = "127.0.0.0" }));
             });
         }
     }

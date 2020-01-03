@@ -95,7 +95,7 @@
      * @returns {Promise} A promise containing data about the server response.
      */
     async function hit() {
-        return await env.fetch(`${defaults.api.schema}://${defaults.api.host}:${defaults.api.port}/${defaults.api.pathname}`, {
+        return await env.fetch(`${defaults.api.scheme}://${defaults.api.host}:${defaults.api.port}/${defaults.api.pathname}`, {
             method: "POST",
             credentials: "omit",
             headers: {

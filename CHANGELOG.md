@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2020-01-02
+### Added
+- Get by ID operation on analytics controller.
+
+### Fixed
+- Parameters collection data type (AnalyticsPayload.cs);
+- AnalyticsPayload constructor and unit tests;
+- Typo on vn-analytics.js making API unreachable.
+
 ## [0.2.0] - 2020-01-02
 ### Added
 - Swagger generation tool;

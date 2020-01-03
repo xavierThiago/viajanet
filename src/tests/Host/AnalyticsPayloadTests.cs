@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using ViajaNet.JobApplication.Host.Api;
 using Xunit;
@@ -14,9 +15,14 @@ namespace ViajaNet.JobApplication.Tests
             const string VendorName = "Chrome";
             const string VendorVersion = "58.34.43.2019";
 
+            var parameters = new Dictionary<string, List<string>>
+            {
+                { "bar", new List<string> { "true" } }
+            };
+
             //Act
             var vendor = new AnalyticsPayload.VendorPayload(VendorName, VendorVersion);
-            var payload = new AnalyticsPayload(PageName, vendor);
+            var payload = new AnalyticsPayload(PageName, vendor, parameters);
 
             //Assert
             Assert.NotNull(vendor);
@@ -36,7 +42,13 @@ namespace ViajaNet.JobApplication.Tests
             const string IP = "127.0.0.0";
 
             var vendor = new AnalyticsPayload.VendorPayload(VendorName, VendorVersion);
-            var payload = new AnalyticsPayload(PageName, vendor);
+
+            var parameters = new Dictionary<string, List<string>>
+            {
+                { "bar", new List<string> { "true" } }
+            };
+
+            var payload = new AnalyticsPayload(PageName, vendor, parameters);
 
             //Act
             payload.AddIp(IP);
@@ -57,7 +69,13 @@ namespace ViajaNet.JobApplication.Tests
             const string IP = "127.0.0.0";
 
             var vendor = new AnalyticsPayload.VendorPayload(VendorName, VendorVersion);
-            var payload = new AnalyticsPayload(PageName, vendor);
+
+            var parameters = new Dictionary<string, List<string>>
+            {
+                { "bar", new List<string> { "true" } }
+            };
+
+            var payload = new AnalyticsPayload(PageName, vendor, parameters);
 
             //Act
             payload.AddIp(IPAddress.Parse(IP));

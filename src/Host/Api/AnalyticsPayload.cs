@@ -11,7 +11,7 @@ namespace ViajaNet.JobApplication.Host.Api
     /// Create an instance of <see cref="AnalyticsPayload"/>.
     /// </summary>
     /// <remarks>Analytics API receives it as a payload.</remarks>
-    public class AnalyticsPayload
+    public class AnalyticsPayload : IValidatableObject
     {
         /// <summary>
         /// Client IP.
@@ -36,20 +36,24 @@ namespace ViajaNet.JobApplication.Host.Api
         [JsonProperty("vendor")]
         public VendorPayload Vendor { get; set; }
 
-        /* [JsonProperty("p")]
-        public IEnumerable<IDictionary<string, IEnumerable<string>>> P { get; set; } */
+        /// <summary>
+        /// Client parameters
+        /// </summary>
+        /// <value>Parameters from client's query string.</value>
+        [JsonProperty("parameters")]
+        public Dictionary<string, List<string>> Parameters { get; set; }
 
         /// <summary>
         /// Create an instance of <see cref="AnalyticsPayload"/>, with a <paramref name="pageName"/> and <paramref name="vendor"/>.
         /// </summary>
         /// <param name="pageName">Page name.</param>
         /// <param name="vendor">Browser information.</param>
-        public AnalyticsPayload(string pageName, VendorPayload vendor/* ,
-                                    IEnumerable<IDictionary<string, IEnumerable<string>>> parameters */)
+        public AnalyticsPayload(string pageName, VendorPayload vendor,
+                                                    Dictionary<string, List<string>> parameters)
         {
             this.PageName = pageName;
             this.Vendor = vendor;
-            // this.P = parameters;
+            this.Parameters = parameters;
         }
 
         /// <summary>
@@ -88,6 +92,8 @@ namespace ViajaNet.JobApplication.Host.Api
 
             this.IP = ipAddress.ToString();
         }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
 
         /// <summary>
         /// Create an instance of <see cref="VendorPayload"/>.
