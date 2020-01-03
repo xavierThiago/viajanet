@@ -34,16 +34,7 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
             this._address = new PublicationAddress(string.Empty, string.Empty, string.Empty);
         }
 
-        ~QueueService() => this.Dispose(false);
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this._disposed)
-            {
-                this._channel.Dispose();
-                this._disposed = true;
-            }
-        }
+        ~QueueService() => this.Dispose();
 
         public void Push<TValue>(TValue data)
             where TValue : class, new()
@@ -112,8 +103,13 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
 
         public void Dispose()
         {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
+            if (!this._disposed)
+            {
+                this._disposed = true;
+
+                this._channel.Dispose();
+                GC.SuppressFinalize(this);
+            }
         }
     }
 }

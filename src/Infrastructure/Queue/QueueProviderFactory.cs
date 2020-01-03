@@ -5,7 +5,7 @@ using System;
 
 namespace ViajaNet.JobApplication.Infrastructure.Queue
 {
-    public class QueueProviderFactory : IDisposable, IQueueFactory
+    public class QueueProviderFactory : IQueueFactory
     {
         private bool _disposed = false;
         private readonly ConnectionFactory _factory;
@@ -79,8 +79,9 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
         {
             if (!this._disposed)
             {
-                this._connection.Value.Dispose();
                 this._disposed = true;
+
+                this._connection.Value.Dispose();
             }
         }
     }

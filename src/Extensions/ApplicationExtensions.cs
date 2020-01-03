@@ -7,7 +7,8 @@ namespace ViajaNet.JobApplication.Extensions
     {
         public static IServiceCollection AddViajaNetApplication(this IServiceCollection services)
         {
-            services.AddViajaNetProviders();
+            services.AddViajaNetProviders()
+                .AddViajaNetRepositories();
 
             return services.AddTransient<IAnalyticsAppService, AnalyticsAppService>();
         }
