@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using ViajaNet.JobApplication.Application.Core;
 
 namespace ViajaNet.JobApplication.Host.Api.Controllers
 {

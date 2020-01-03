@@ -4,9 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using ViajaNet.JobApplication.Infrastructure.Queue;
+using ViajaNet.JobApplication.Application.Service;
 using ViajaNet.JobApplication.Extensions;
-using ViajaNet.JobApplication.Application;
 
 namespace ViajaNet.JobApplication.Host.Worker
 {

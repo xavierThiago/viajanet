@@ -1,10 +1,7 @@
 using System;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Quartz;
-using ViajaNet.JobApplication.Application;
-using ViajaNet.JobApplication.Infrastructure.Queue;
+using ViajaNet.JobApplication.Application.Service;
 
 namespace ViajaNet.JobApplication.Host.Worker
 {

@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace ViajaNet.JobApplication.Application
+namespace ViajaNet.JobApplication.Application.Core
 {
     public class VendorDto
     {
@@ -25,6 +25,16 @@ namespace ViajaNet.JobApplication.Application
 
             this.Name = name;
             this.Version = version;
+        }
+
+        public static VendorDto FromPayload(AnalyticsPayload.VendorPayload vendorPayload)
+        {
+            if (vendorPayload == null)
+            {
+                throw new ArgumentNullException(nameof(vendorPayload));
+            }
+
+            return new VendorDto(vendorPayload.Name, vendorPayload.Version);
         }
     }
 }

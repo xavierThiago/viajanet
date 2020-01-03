@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using ViajaNet.JobApplication.Application.Core;
 
-namespace ViajaNet.JobApplication.Application
+namespace ViajaNet.JobApplication.Application.Service
 {
     public interface IAnalyticsAppService
     {

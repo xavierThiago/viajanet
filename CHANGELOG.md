@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2020-01-03
+### Added
+- .nuspec for extensions project.
+
+### Changed
+- Application layer. Now, it has two projects: core and service;
+
+### Fixed
+- Missing extensions project language version specification.
+
 ## [0.4.0] - 2020-01-03
 ### Added
 - Application service layer contracts;

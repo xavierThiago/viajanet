@@ -5,7 +5,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
-namespace ViajaNet.JobApplication.Host.Api
+namespace ViajaNet.JobApplication.Application.Core
 {
     /// <summary>
     /// Create an instance of <see cref="AnalyticsPayload"/>.
@@ -94,6 +94,13 @@ namespace ViajaNet.JobApplication.Host.Api
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
+
+        public AnalyticsDto ToDto()
+        {
+            return new AnalyticsDto(this.IP, this.PageName,
+                                        new VendorDto(this.Vendor.Name, this.Vendor.Version),
+                                            this.Parameters);
+        }
 
         /// <summary>
         /// Create an instance of <see cref="VendorPayload"/>.

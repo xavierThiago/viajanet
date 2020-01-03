@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Net;
-using ViajaNet.JobApplication.Host.Api;
+using ViajaNet.JobApplication.Application.Core;
 using Xunit;
 
 namespace ViajaNet.JobApplication.Tests

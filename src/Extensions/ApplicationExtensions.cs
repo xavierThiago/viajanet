@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using ViajaNet.JobApplication.Application;
+using ViajaNet.JobApplication.Application.Service;
 
 namespace ViajaNet.JobApplication.Extensions
 {

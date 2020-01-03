@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Queue\ViajaNet.JobApplication.Infrastructure.Queue.csproj" />
-    <ProjectReference Include="..\Application\ViajaNet.JobApplication.Application.csproj" />
+    <ProjectReference Include="..\Application\Service\ViajaNet.JobApplication.Application.Service.csproj" />
   </ItemGroup>
 
 </Project>

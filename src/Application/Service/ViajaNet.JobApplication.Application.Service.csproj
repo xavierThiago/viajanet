@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Queue\ViajaNet.JobApplication.Infrastructure.Queue.csproj" />
+    <ProjectReference Include="..\Core\ViajaNet.JobApplication.Application.Core.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Queue\ViajaNet.JobApplication.Infrastructure.Queue.csproj" />
   </ItemGroup>
 
 </Project>

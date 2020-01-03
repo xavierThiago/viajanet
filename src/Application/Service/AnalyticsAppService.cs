@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ViajaNet.JobApplication.Application.Core;
 using ViajaNet.JobApplication.Infrastructure.Queue;
 
-namespace ViajaNet.JobApplication.Application
+namespace ViajaNet.JobApplication.Application.Service
 {
     public class AnalyticsAppService : IAnalyticsAppService
     {

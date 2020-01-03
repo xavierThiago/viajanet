@@ -13,13 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{ADF9061D-2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViajaNet.JobApplication.Host.Worker", "src\Host\Worker\ViajaNet.JobApplication.Host.Worker.csproj", "{1B20E204-7DFD-4694-AD2F-C4059FAC0C8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViajaNet.JobApplication.Application", "src\Application\ViajaNet.JobApplication.Application.csproj", "{93F594AE-9A07-43BB-8BA7-C96FD62800C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViajaNet.JobApplication.Application.Service", "src\Application\Service\ViajaNet.JobApplication.Application.Service.csproj", "{93F594AE-9A07-43BB-8BA7-C96FD62800C1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9443A500-EB60-4A8F-B98A-92D0AA031308}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViajaNet.JobApplication.Infrastructure.Queue", "src\Infrastructure\Queue\ViajaNet.JobApplication.Infrastructure.Queue.csproj", "{6A7FDF01-9ED4-4F4D-9FBF-AB8CBA70303F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViajaNet.JobApplication.Extensions", "src\Extensions\ViajaNet.JobApplication.Extensions.csproj", "{021C129B-BA92-485D-80E8-523E3EE8B77D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{EE2894EF-BB93-4E4C-9B07-91063E44947D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViajaNet.JobApplication.Application.Core", "src\Application\Core\ViajaNet.JobApplication.Application.Core.csproj", "{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +110,18 @@ Global
 		{021C129B-BA92-485D-80E8-523E3EE8B77D}.Release|x64.Build.0 = Release|Any CPU
 		{021C129B-BA92-485D-80E8-523E3EE8B77D}.Release|x86.ActiveCfg = Release|Any CPU
 		{021C129B-BA92-485D-80E8-523E3EE8B77D}.Release|x86.Build.0 = Release|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Debug|x64.Build.0 = Debug|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Debug|x86.Build.0 = Debug|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Release|x64.ActiveCfg = Release|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Release|x64.Build.0 = Release|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Release|x86.ActiveCfg = Release|Any CPU
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8E91C1EE-4E07-4002-8621-F186BB414ABA} = {EC6105F0-286D-49DE-A4C9-2668C8BB83D6}
@@ -116,5 +132,7 @@ Global
 		{9443A500-EB60-4A8F-B98A-92D0AA031308} = {EC6105F0-286D-49DE-A4C9-2668C8BB83D6}
 		{6A7FDF01-9ED4-4F4D-9FBF-AB8CBA70303F} = {9443A500-EB60-4A8F-B98A-92D0AA031308}
 		{021C129B-BA92-485D-80E8-523E3EE8B77D} = {EC6105F0-286D-49DE-A4C9-2668C8BB83D6}
+		{EE2894EF-BB93-4E4C-9B07-91063E44947D} = {EC6105F0-286D-49DE-A4C9-2668C8BB83D6}
+		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66} = {EE2894EF-BB93-4E4C-9B07-91063E44947D}
 	EndGlobalSection
 EndGlobal
