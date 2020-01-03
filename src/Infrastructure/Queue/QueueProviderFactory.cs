@@ -15,7 +15,7 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
         {
             if (options == null)
             {
-                throw new ArgumentNullException(nameof(options));
+                throw new InvalidOperationException($"Could not resolve {nameof(QueueConfiguration)} type from DI container.");
             }
 
             if (options.Value.Uri != null)
@@ -63,16 +63,7 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
             });
         }
 
-        ~QueueProviderFactory() => this.Dispose(false);
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this._disposed)
-            {
-                this._connection.Value.Dispose();
-                this._disposed = true;
-            }
-        }
+        ~QueueProviderFactory() => this.Dispose();
 
         public IModel CreateChannel()
         {
@@ -84,6 +75,13 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
             return this._connection.Value.CreateModel();
         }
 
-        public void Dispose() => this.Dispose(true);
+        public void Dispose()
+        {
+            if (!this._disposed)
+            {
+                this._connection.Value.Dispose();
+                this._disposed = true;
+            }
+        }
     }
 }

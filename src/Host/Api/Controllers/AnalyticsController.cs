@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 using ViajaNet.JobApplication.Application.Core;
+using ViajaNet.JobApplication.Application.Service;
 
 namespace ViajaNet.JobApplication.Host.Api.Controllers
 {
@@ -12,6 +14,18 @@ namespace ViajaNet.JobApplication.Host.Api.Controllers
     [AllowAnonymous]
     public class AnalyticsController : ControllerBase
     {
+        private readonly IAnalyticsAppService _analyticsAppService;
+
+        public AnalyticsController([FromServices] IAnalyticsAppService analyticsAppService)
+        {
+            if (analyticsAppService == null)
+            {
+                throw new InvalidOperationException($"Could not resolve {nameof(IAnalyticsAppService)} type from DI container.");
+            }
+
+            this._analyticsAppService = analyticsAppService;
+        }
+
         /// <summary>
         /// Creates an analytics hit on server.
         /// </summary>
