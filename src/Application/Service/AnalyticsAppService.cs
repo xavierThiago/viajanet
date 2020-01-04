@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,51 +40,49 @@ namespace ViajaNet.JobApplication.Application.Service
             this._queryHandler = queryHandler;
         }
 
-        public Task<long> CreateAsync(AnalyticsDto analyticsDto) => this.CreateAsync(analyticsDto, CancellationToken.None);
+        public Task<string> CreateAsync(AnalyticsDto analyticsDto) => this.CreateAsync(analyticsDto, CancellationToken.None);
 
-        public async Task<long> CreateAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken)
+        public async Task<string> CreateAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            long id = await this._commandHandler.CreateAsync(analyticsDto.ToEntity());
-
-            return id;
+            return await this._commandHandler.CreateAsync(analyticsDto.ToEntity());;
         }
 
         public Task<AnalyticsDto> GetByIdAsync(string id) => this.GetByIdAsync(id, CancellationToken.None);
 
-        public Task<AnalyticsDto> GetByIdAsync(string id, CancellationToken cancellationToken)
+        public async Task<AnalyticsDto> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return null;
+            return (await this._queryHandler.QueryByIdAsync(id)).ToDto();
         }
 
         public Task<IEnumerable<AnalyticsDto>> GetByIPAsync(string ip) => this.GetByIPAsync(ip, CancellationToken.None);
 
-        public Task<IEnumerable<AnalyticsDto>> GetByIPAsync(string ip, CancellationToken cancellationToken)
+        public async Task<IEnumerable<AnalyticsDto>> GetByIPAsync(string ip, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return null;
+            return (await this._queryHandler.QueryByParametersAsync(ip, null, cancellationToken)).Select(x => x.ToDto());
         }
 
         public Task<IEnumerable<AnalyticsDto>> GetByPageNameAsync(string pageName) => this.GetByPageNameAsync(pageName, CancellationToken.None);
 
-        public Task<IEnumerable<AnalyticsDto>> GetByPageNameAsync(string pageName, CancellationToken cancellationToken)
+        public async Task<IEnumerable<AnalyticsDto>> GetByPageNameAsync(string pageName, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return null;
+            return (await this._queryHandler.QueryByParametersAsync(null, pageName, cancellationToken)).Select(x => x.ToDto());
         }
 
         public Task<IEnumerable<AnalyticsDto>> GetByIPAndPageNameAsync(string ip, string pageName) => this.GetByIPAndPageNameAsync(ip, pageName, CancellationToken.None);
 
-        public Task<IEnumerable<AnalyticsDto>> GetByIPAndPageNameAsync(string ip, string pageName, CancellationToken cancellationToken)
+        public async Task<IEnumerable<AnalyticsDto>> GetByIPAndPageNameAsync(string ip, string pageName, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return null;
+            return (await this._queryHandler.QueryByParametersAsync(ip, pageName, cancellationToken)).Select(x => x.ToDto());
         }
 
         public void PushToQueue(string topic, AnalyticsDto analyticsDto)

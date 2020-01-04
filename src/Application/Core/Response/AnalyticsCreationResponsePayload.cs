@@ -13,13 +13,13 @@ namespace ViajaNet.JobApplication.Application.Core
         /// </summary>
         /// <value>Identification comes from database.</value>
         [JsonProperty("id")]
-        public long Id { get; private set; }
+        public string Id { get; private set; }
 
-        public AnalyticsCreationResponsePayload(long id)
+        public AnalyticsCreationResponsePayload(string id)
         {
-            if (id < 0)
+            if (id == null)
             {
-                throw new ArgumentException("Id can not be less than zero.", nameof(id));
+                throw new ArgumentNullException(nameof(id));
             }
 
             this.Id = id;

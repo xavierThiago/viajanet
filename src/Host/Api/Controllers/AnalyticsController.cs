@@ -51,7 +51,7 @@ namespace ViajaNet.JobApplication.Host.Api.Controllers
 
             data.AddIp(ipAddress);
 
-            long id = await this._analyticsAppService.CreateAsync(data.ToDto());
+            string id = await this._analyticsAppService.CreateAsync(data.ToDto());
 
             return new CreatedResult
             (

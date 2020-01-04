@@ -31,18 +31,20 @@ namespace ViajaNet.JobApplication.Infrastructure
             this._sqlServerService = sqlServerService;
         }
 
-        public Task<long> CreateAsync(AnalyticsEntity entity) => this.CreateAsync(entity, CancellationToken.None);
+        public Task<string> CreateAsync(AnalyticsEntity entity) => this.CreateAsync(entity, CancellationToken.None);
 
-        public async Task<long> CreateAsync(AnalyticsEntity entity, CancellationToken cancellationToken)
+        public async Task<string> CreateAsync(AnalyticsEntity entity, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return await this.CreateAsync(entity, cancellationToken);
+            await this._sqlServerService.CreateAsync(entity, cancellationToken);
+
+            return await this._couchDbService.CreateAsync(entity, cancellationToken);
         }
 
-        public Task<AnalyticsEntity> QueryByIdAsync(long id) => this.QueryByIdAsync(id, CancellationToken.None);
+        public Task<AnalyticsEntity> QueryByIdAsync(string id) => this.QueryByIdAsync(id, CancellationToken.None);
 
-        public async Task<AnalyticsEntity> QueryByIdAsync(long id, CancellationToken cancellationToken)
+        public async Task<AnalyticsEntity> QueryByIdAsync(string id, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 

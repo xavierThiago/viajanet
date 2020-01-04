@@ -7,8 +7,8 @@ namespace ViajaNet.JobApplication.Infrastructure
 {
     public interface IRepositoryQuery
     {
-        Task<AnalyticsEntity> QueryByIdAsync(long id);
-        Task<AnalyticsEntity> QueryByIdAsync(long id, CancellationToken cancellationToken);
+        Task<AnalyticsEntity> QueryByIdAsync(string id);
+        Task<AnalyticsEntity> QueryByIdAsync(string id, CancellationToken cancellationToken);
         Task<IEnumerable<AnalyticsEntity>> QueryByParametersAsync(string ip, string pageName);
         Task<IEnumerable<AnalyticsEntity>> QueryByParametersAsync(string ip, string pageName, CancellationToken cancellationToken);
     }

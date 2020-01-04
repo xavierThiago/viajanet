@@ -8,8 +8,8 @@ namespace ViajaNet.JobApplication.Application.Service
 {
     public interface IAnalyticsAppService
     {
-        Task<long> CreateAsync(AnalyticsDto analyticsDto);
-        Task<long> CreateAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken);
+        Task<string> CreateAsync(AnalyticsDto analyticsDto);
+        Task<string> CreateAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken);
         Task<AnalyticsDto> GetByIdAsync(string id);
         Task<AnalyticsDto> GetByIdAsync(string id, CancellationToken cancellationToken);
         Task<IEnumerable<AnalyticsDto>> GetByIPAsync(string ip);

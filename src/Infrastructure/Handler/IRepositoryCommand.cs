@@ -6,7 +6,7 @@ namespace ViajaNet.JobApplication.Infrastructure
 {
     public interface IRepositoryCommand
     {
-        Task<long> CreateAsync(AnalyticsEntity entity);
-        Task<long> CreateAsync(AnalyticsEntity entity, CancellationToken cancellationToken);
+        Task<string> CreateAsync(AnalyticsEntity entity);
+        Task<string> CreateAsync(AnalyticsEntity entity, CancellationToken cancellationToken);
     }
 }
