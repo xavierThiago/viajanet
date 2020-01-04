@@ -73,8 +73,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the Apache License, Version 2.0 - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Althought not much used on this project, I'd lik to thanks [Rafael Cruzeiro](https://github.com/rcruzeiro) for inspiring me on DDD development.
+* Althought not much used on this project, I'd like to thanks [Rafael Cruzeiro](https://github.com/rcruzeiro) for inspiring me on DDD development.
