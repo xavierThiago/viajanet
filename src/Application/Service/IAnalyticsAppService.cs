@@ -20,6 +20,6 @@ namespace ViajaNet.JobApplication.Application.Service
         Task<IEnumerable<AnalyticsDto>> GetByIPAndPageNameAsync(string ip, string pageName, CancellationToken cancellationToken);
 
         void PushToQueue(string topic, AnalyticsDto analyticsDto);
-        void ShiftFromQueue(string topic, EventHandler<AnalyticsDto> handler);
+        void ShiftFromQueue(string topic, Action<AnalyticsDto> handler);
     }
 }

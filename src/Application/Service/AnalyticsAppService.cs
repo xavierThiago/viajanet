@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using ViajaNet.JobApplication.Application.Core;
 using ViajaNet.JobApplication.Infrastructure;
 using ViajaNet.JobApplication.Infrastructure.Queue;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace ViajaNet.JobApplication.Application.Service
 {
@@ -46,7 +48,7 @@ namespace ViajaNet.JobApplication.Application.Service
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return await this._commandHandler.CreateAsync(analyticsDto.ToEntity());;
+            return await this._commandHandler.CreateAsync(analyticsDto.ToEntity()); ;
         }
 
         public Task<AnalyticsDto> GetByIdAsync(string id) => this.GetByIdAsync(id, CancellationToken.None);
@@ -85,14 +87,17 @@ namespace ViajaNet.JobApplication.Application.Service
             return (await this._queryHandler.QueryByParametersAsync(ip, pageName, cancellationToken)).Select(x => x.ToDto());
         }
 
-        public void PushToQueue(string topic, AnalyticsDto analyticsDto)
-        {
-            throw new NotImplementedException();
-        }
+        public void PushToQueue(string topic, AnalyticsDto analyticsDto) => this._queueProvider.Push<AnalyticsDto>(topic, analyticsDto);
 
-        public void ShiftFromQueue(string topic, EventHandler<AnalyticsDto> handler)
+        public void ShiftFromQueue(string topic, Action<AnalyticsDto> handler)
         {
-            throw new NotImplementedException();
+            this._queueProvider.Shift(topic, (sender, e) =>
+            {
+                var json = Encoding.UTF8.GetString(e.Body);
+                var hit = JsonConvert.DeserializeObject<AnalyticsDto>(json);
+
+                handler(hit);
+            });
         }
     }
 }

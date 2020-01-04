@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.0] - 2020-01-04
+### Added
+- Docker instructions on README.md;
+- Implementation of application service in queue consumption job.
+
+### Fixed
+- IQueueProvider generics restriction.
+
 ## [0.13.2] - 2020-01-04
 ### Fixed
 - Typo on README.md.

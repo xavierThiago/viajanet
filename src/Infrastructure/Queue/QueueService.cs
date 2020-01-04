@@ -37,7 +37,7 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
         ~QueueService() => this.Dispose();
 
         public void Push<TValue>(TValue data)
-            where TValue : class, new()
+            where TValue : class
         {
             if (data == null)
             {
@@ -48,7 +48,7 @@ namespace ViajaNet.JobApplication.Infrastructure.Queue
         }
 
         public void Push<TValue>(string topic, TValue data)
-            where TValue : class, new()
+            where TValue : class
         {
             if (topic == null)
             {

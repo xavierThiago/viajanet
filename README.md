@@ -11,11 +11,12 @@ These instructions will get you a copy of the project up and running on your loc
 To build and run the project, you'll need to have installed theses tools:
 1. .NET 2.2 SDK and Runtime;
 2. NPM 2.0+;
-3. NodeJS 8+.
+3. NodeJS 8+;
+4. Docker.
 
 ### Installing
 
-To prepare your local machine there are just **three** steps:
+To prepare your local machine there are just **four** steps:
 
 1. Create your local NPM assets:
 
@@ -33,6 +34,16 @@ grunt dist
 
 ```
 dotnet build
+```
+
+4. Start containers of RabbitMQ, Microsoft SqlServer and CouchDb:
+
+```
+docker run -d -p 5672:5672 --name awesome-queue --hostname localhost rabbitmq
+
+docker run -d -p 8091:8091 --name couchdb couchdb
+
+docker run -d -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=just-testing' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
 ```
 
 ## Running the tests
@@ -58,6 +69,7 @@ For now, deployment is not ready. In the future, a GitHub Action will be createa
 * [.NET Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2) - Back-end language
 * [NPM](https://www.npmjs.com/) - Dependency Management
 * [GruntJs](https://gruntjs.com/) - Task management
+* [Docker](https://www.docker.com/) - Build containerized apps
 
 ## Contributing
 

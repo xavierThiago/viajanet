@@ -22,7 +22,7 @@ namespace ViajaNet.JobApplication.Host.Worker
         /// </summary>
         /// <param name="context">Current job runtime information.</param>
         /// <returns>A <see cref="Task"/> of the current job execution.</returns>
-        public async Task Execute(IJobExecutionContext context)
+        public Task Execute(IJobExecutionContext context)
         {
             if (context.MergedJobDataMap.TryGetValue("appService", out object appService))
             {
@@ -30,23 +30,24 @@ namespace ViajaNet.JobApplication.Host.Worker
 
                 if (service == null)
                 {
-                    await Console.Out.WriteLineAsync($"Job \"{context.JobDetail.Key}\" started.");
+                    _ = Console.Out.WriteLineAsync($"Job \"{context.JobDetail.Key}\" started.");
 
-                    return;
+                    return Task.CompletedTask;
                 }
 
-                /* provider.Shift("analytics", async (sender, e) =>
+                service.ShiftFromQueue("analytics", async (hit) =>
                 {
-                    var json = Encoding.UTF8.GetString(e.Body);
-                    var hit = JsonConvert.DeserializeObject<object>(json);
+                    await service.CreateAsync(hit);
 
-                    await Console.Out.WriteAsync("Queue consumption succeeded.");
-                }); */
+                    _ = Console.Out.WriteAsync("Queue consumption succeeded.");
+                });
             }
             else
             {
-                await Console.Out.WriteLineAsync($"Job \"{context.JobDetail.Key}\" started.");
+                _ = Console.Out.WriteLineAsync($"Job \"{context.JobDetail.Key}\" started.");
             }
+
+            return Task.CompletedTask;
         }
     }
 }
