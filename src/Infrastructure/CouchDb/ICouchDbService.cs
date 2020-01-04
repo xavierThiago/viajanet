@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Couchbase.Core;
@@ -8,9 +9,11 @@ namespace ViajaNet.JobApplication.Infrastructure.CouchDb
 {
     public interface ICouchDbService : IDisposable
     {
-        Task<string> CreateAsync(AnalyticsDto analyticsDto);
-        Task<string> CreateAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken);
-        Task GetAsync(AnalyticsDto analyticsDto);
-        Task GetAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken);
+        Task<string> CreateAsync(AnalyticsEntity analyticsEntity);
+        Task<string> CreateAsync(AnalyticsEntity analyticsEntity, CancellationToken cancellationToken);
+        Task<AnalyticsEntity> GetAsync(string id);
+        Task<AnalyticsEntity> GetAsync(string id, CancellationToken cancellationToken);
+        Task<IEnumerable<AnalyticsEntity>> GetAsync(string ip, string pageName);
+        Task<IEnumerable<AnalyticsEntity>> GetAsync(string ip, string pageName, CancellationToken cancellationToken);
     }
 }

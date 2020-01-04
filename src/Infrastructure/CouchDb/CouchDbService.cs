@@ -3,7 +3,8 @@ using Couchbase.Core;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
-using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ViajaNet.JobApplication.Application.Core;
@@ -27,12 +28,12 @@ namespace ViajaNet.JobApplication.Infrastructure.CouchDb
 
         ~CouchDbService() => this.Dispose();
 
-        private async Task<string> CreateInternalAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken)
+        private async Task<string> CreateInternalAsync(AnalyticsEntity analyticsEntity, CancellationToken cancellationToken)
         {
-            var document = new Document<AnalyticsDto>
+            var document = new Document<AnalyticsEntity>
             {
                 Id = Guid.NewGuid().ToString(),
-                Content = analyticsDto
+                Content = analyticsEntity
             };
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -44,35 +45,56 @@ namespace ViajaNet.JobApplication.Infrastructure.CouchDb
             return upsert.Id;
         }
 
-        private Task GetInternalAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken)
+        private async Task<AnalyticsEntity> GetByIdInternalAsync(string id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return (await this._bucket.GetDocumentAsync<AnalyticsEntity>(id)).Document.Content;
         }
 
-        public Task<string> CreateAsync(AnalyticsDto analyticsDto) => this.CreateAsync(analyticsDto, CancellationToken.None);
-
-        public async Task<string> CreateAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken)
+        private async Task<IEnumerable<AnalyticsEntity>> GetByParametersInternalAsync(string ip, string pageName, CancellationToken cancellationToken)
         {
-            if (analyticsDto == null)
+            cancellationToken.ThrowIfCancellationRequested();
+
+            // Need more time to learn CouchDb.
+            return (await this._bucket.QueryAsync<AnalyticsEntity>("")).Rows;
+        }
+
+        public Task<string> CreateAsync(AnalyticsEntity analyticsEntity) => this.CreateAsync(analyticsEntity, CancellationToken.None);
+
+        public async Task<string> CreateAsync(AnalyticsEntity analyticsEntity, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (analyticsEntity == null)
             {
-                throw new ArgumentNullException(nameof(analyticsDto));
+                throw new ArgumentNullException(nameof(analyticsEntity));
             }
 
-            return await this.CreateInternalAsync(analyticsDto, cancellationToken);
+            return await this.CreateInternalAsync(analyticsEntity, cancellationToken);
         }
 
-        public Task GetAsync(AnalyticsDto analyticsDto) => this.GetAsync(analyticsDto, CancellationToken.None);
+        public Task<AnalyticsEntity> GetAsync(string id) => this.GetAsync(id, CancellationToken.None);
 
-        public Task GetAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken)
+        public Task<AnalyticsEntity> GetAsync(string id, CancellationToken cancellationToken)
         {
-            if (analyticsDto == null)
+            if (id == null)
             {
-                throw new ArgumentNullException(nameof(analyticsDto));
+                throw new ArgumentNullException(nameof(id));
             }
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            return this.GetInternalAsync(analyticsDto, cancellationToken);
+            return this.GetByIdInternalAsync(id, cancellationToken);
+        }
+
+        public Task<IEnumerable<AnalyticsEntity>> GetAsync(string ip, string pageName) => this.GetAsync(ip, pageName, CancellationToken.None);
+
+        public Task<IEnumerable<AnalyticsEntity>> GetAsync(string ip, string pageName, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return this.GetByParametersInternalAsync(ip, pageName, cancellationToken);
         }
 
         public void Dispose()

@@ -41,11 +41,13 @@ namespace ViajaNet.JobApplication.Application.Service
 
         public Task<long> CreateAsync(AnalyticsDto analyticsDto) => this.CreateAsync(analyticsDto, CancellationToken.None);
 
-        public Task<long> CreateAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken)
+        public async Task<long> CreateAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return Task.FromResult(1L);
+            long id = await this._commandHandler.CreateAsync(analyticsDto.ToEntity());
+
+            return id;
         }
 
         public Task<AnalyticsDto> GetByIdAsync(string id) => this.GetByIdAsync(id, CancellationToken.None);

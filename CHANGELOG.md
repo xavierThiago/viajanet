@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.0] - 2020-01-04
+### Added
+- SqlServer service layer.
+
+### Fixed
+- Repository handler contracts.
+
 ## [0.10.0] - 2020-01-03
 ### Added
 - Added an response interface to the API (forces developer to ensure consistence);

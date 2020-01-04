@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CouchDb\ViajaNet.JobApplication.Infrastructure.CouchDb.csproj" />
     <ProjectReference Include="..\..\Application\Core\ViajaNet.JobApplication.Application.Core.csproj" />
+    <ProjectReference Include="..\SqlServer\ViajaNet.JobApplication.Infrastructure.SqlServer.csproj" />
   </ItemGroup>
 
 </Project>

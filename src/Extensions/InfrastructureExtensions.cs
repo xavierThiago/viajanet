@@ -47,9 +47,10 @@ namespace ViajaNet.JobApplication.Extensions
 
             return services.AddOptions()
                 .Configure<CouchDbConfiguration>(options => configuration.GetSection(CouchDbConfigurationSection).Bind(options))
+                .AddDbContext<AnalyticsContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")))
+                .AddTransient<ISqlServerService, SqlServerService>()
                 .AddSingleton<ICouchDbFactory, CouchDbFactory>()
                 .AddTransient<ICouchDbService, CouchDbService>()
-                .AddDbContext<AnalyticsContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")))
                 .AddSingleton<IRepositoryCommand, RepositoryHandler>()
                 .AddSingleton<IRepositoryQuery, RepositoryHandler>();
         }
