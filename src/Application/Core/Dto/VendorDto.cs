@@ -42,7 +42,7 @@ namespace ViajaNet.JobApplication.Application.Core
             }
         }
 
-        public static VendorDto FromPayload(AnalyticsPayload.VendorPayload vendorPayload)
+        public static VendorDto FromPayload(AnalyticsRequestPayload.VendorRequestPayload vendorPayload)
         {
             if (vendorPayload == null)
             {

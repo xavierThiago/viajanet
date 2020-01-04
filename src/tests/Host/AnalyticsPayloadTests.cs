@@ -21,8 +21,8 @@ namespace ViajaNet.JobApplication.Tests
             };
 
             //Act
-            var vendor = new AnalyticsPayload.VendorPayload(VendorName, VendorVersion);
-            var payload = new AnalyticsPayload(PageName, vendor, parameters);
+            var vendor = new AnalyticsRequestPayload.VendorRequestPayload(VendorName, VendorVersion);
+            var payload = new AnalyticsRequestPayload(PageName, vendor, parameters);
 
             //Assert
             Assert.NotNull(vendor);
@@ -41,14 +41,14 @@ namespace ViajaNet.JobApplication.Tests
             const string VendorVersion = "58.34.43.2019";
             const string IP = "127.0.0.0";
 
-            var vendor = new AnalyticsPayload.VendorPayload(VendorName, VendorVersion);
+            var vendor = new AnalyticsRequestPayload.VendorRequestPayload(VendorName, VendorVersion);
 
             var parameters = new Dictionary<string, List<string>>
             {
                 { "bar", new List<string> { "true" } }
             };
 
-            var payload = new AnalyticsPayload(PageName, vendor, parameters);
+            var payload = new AnalyticsRequestPayload(PageName, vendor, parameters);
 
             //Act
             payload.AddIp(IP);
@@ -68,14 +68,14 @@ namespace ViajaNet.JobApplication.Tests
             const string VendorVersion = "58.34.43.2019";
             const string IP = "127.0.0.0";
 
-            var vendor = new AnalyticsPayload.VendorPayload(VendorName, VendorVersion);
+            var vendor = new AnalyticsRequestPayload.VendorRequestPayload(VendorName, VendorVersion);
 
             var parameters = new Dictionary<string, List<string>>
             {
                 { "bar", new List<string> { "true" } }
             };
 
-            var payload = new AnalyticsPayload(PageName, vendor, parameters);
+            var payload = new AnalyticsRequestPayload(PageName, vendor, parameters);
 
             //Act
             payload.AddIp(IPAddress.Parse(IP));

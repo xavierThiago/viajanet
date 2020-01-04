@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.0] - 2020-01-03
+### Added
+- Added an response interface to the API (forces developer to ensure consistence);
+
+### Changed
+- Analytics payload separated into two categories: request and response.
+
+### Fixed
+- Id type throughout the application layers.
+
 ## [0.9.0] - 2020-01-03
 ### Added
 - Entity framework (SqlServer) simple structure;

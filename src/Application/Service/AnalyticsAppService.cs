@@ -39,18 +39,18 @@ namespace ViajaNet.JobApplication.Application.Service
             this._queryHandler = queryHandler;
         }
 
-        public Task CreateAsync(AnalyticsDto analyticsDto) => this.CreateAsync(analyticsDto, CancellationToken.None);
+        public Task<long> CreateAsync(AnalyticsDto analyticsDto) => this.CreateAsync(analyticsDto, CancellationToken.None);
 
-        public Task CreateAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken)
+        public Task<long> CreateAsync(AnalyticsDto analyticsDto, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return Task.CompletedTask;
+            return Task.FromResult(1L);
         }
 
-        public Task<IEnumerable<AnalyticsDto>> GetByIdAsync(string id) => this.GetByIdAsync(id, CancellationToken.None);
+        public Task<AnalyticsDto> GetByIdAsync(string id) => this.GetByIdAsync(id, CancellationToken.None);
 
-        public Task<IEnumerable<AnalyticsDto>> GetByIdAsync(string id, CancellationToken cancellationToken)
+        public Task<AnalyticsDto> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 

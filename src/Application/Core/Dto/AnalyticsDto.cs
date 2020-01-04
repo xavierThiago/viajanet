@@ -7,7 +7,7 @@ namespace ViajaNet.JobApplication.Application.Core
     public class AnalyticsDto
     {
         [JsonProperty("Id")]
-        public string Id { get; private set; }
+        public long Id { get; private set; }
 
         [JsonProperty("ip")]
         public string IP { get; private set; }
@@ -81,7 +81,7 @@ namespace ViajaNet.JobApplication.Application.Core
             }
         }
 
-        public static AnalyticsDto FromPayload(AnalyticsPayload analyticsPayload)
+        public static AnalyticsDto FromPayload(AnalyticsRequestPayload analyticsPayload)
         {
             if (analyticsPayload == null)
             {
@@ -96,6 +96,13 @@ namespace ViajaNet.JobApplication.Application.Core
                                             analyticsPayload.Parameters);
         }
 
+        public AnalyticsResponsePayload ToResponse()
+        {
+            return new AnalyticsResponsePayload(this.Id, this.IP, this.PageName,
+                                                    new AnalyticsResponsePayload.VendorResponsePayload(this.Vendor.Name,
+                                                                                                            this.Vendor.Version),
+                                                                                                                 this.Parameters);
+        }
         public AnalyticsEntity ToEntity()
         {
             return new AnalyticsEntity(this.IP, this.PageName,

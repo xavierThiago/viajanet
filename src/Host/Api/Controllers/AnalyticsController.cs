@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using ViajaNet.JobApplication.Application.Core;
 using ViajaNet.JobApplication.Application.Service;
@@ -36,22 +40,24 @@ namespace ViajaNet.JobApplication.Host.Api.Controllers
         [HttpPost]
         [MapToApiVersion("1")]
         [Consumes("application/json")]
-        [ProducesResponseType(201)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(500)]
-        public async Task<IActionResult> CreateAnalyticalHitAsync([FromBody] AnalyticsPayload data)
+        [ProducesResponseType(typeof(SuccessResult<AnalyticsCreationResponsePayload>), 201)]
+        [ProducesResponseType(typeof(ProblemDetails), 400)]
+        [ProducesResponseType(typeof(ProblemDetails), 401)]
+        [ProducesResponseType(typeof(ProblemDetails), 404)]
+        [ProducesResponseType(typeof(ProblemDetails), 500)]
+        public async Task<IActionResult> CreateAnalyticalHitAsync([FromBody] AnalyticsRequestPayload data)
         {
             var ipAddress = this.HttpContext.Connection.RemoteIpAddress;
 
             data.AddIp(ipAddress);
 
-            return await Task.Run(() =>
-            {
-                return new CreatedResult($"{this.HttpContext.Request.Path}?ip={ipAddress}",
-                                            new SuccessResult<AnalyticsPayload>("Analytics hit created succesfully.", data));
-            });
+            long id = await this._analyticsAppService.CreateAsync(data.ToDto());
+
+            return new CreatedResult
+            (
+                $"{this.HttpContext.Request.Path}?ip={ipAddress}",
+                new SuccessResult<AnalyticsCreationResponsePayload>("Analytics hit created succesfully.", new AnalyticsCreationResponsePayload(id))
+            );
         }
 
         /// <summary>
@@ -68,12 +74,21 @@ namespace ViajaNet.JobApplication.Host.Api.Controllers
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetAnalyticsById([FromRoute] string id)
+        public async Task<IActionResult> GetAnalyticsById([FromRoute, StringLength(32)] string id)
         {
-            return await Task.Run(() =>
+            if (!Guid.TryParse(id, out Guid guid))
             {
-                return new JsonResult(new SuccessResult<object>("Analytics hit found.", new { ip = "127.0.0.0" }));
-            });
+                this.ModelState.AddModelError("id", "Id format is incorrect.");
+
+                return BadRequest(this.ModelState);
+            }
+
+            var result = await this._analyticsAppService.GetByIdAsync(id);
+
+            return new JsonResult
+            (
+                new SuccessResult<AnalyticsResponsePayload>("Analytics hit found.", result.ToResponse())
+            );
         }
 
         /// <summary>
@@ -92,10 +107,33 @@ namespace ViajaNet.JobApplication.Host.Api.Controllers
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetAnalyticsByQueryAsync([FromQuery] string ip = null, [FromQuery] string pageName = null)
         {
-            return await Task.Run(() =>
+            if (ip != null && !IPAddress.TryParse(ip, out IPAddress ipAddress))
             {
-                return new JsonResult(new SuccessResult<object>("Analytics hit(s) found.", new { ip = "127.0.0.0" }));
-            });
+                this.ModelState.AddModelError("ip", "IP format is incorrect.");
+            }
+
+            if (pageName != null && pageName == string.Empty)
+            {
+                this.ModelState.AddModelError("id", "Page name is empty.");
+
+                return BadRequest(this.ModelState);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return BadRequest(this.ModelState);
+            }
+
+            var result = await this._analyticsAppService.GetByIPAndPageNameAsync(ip, pageName);
+            var resultConverted = result.Select(x => x.ToResponse()).ToList();
+
+            return new JsonResult
+            (
+                new SuccessResult<IEnumerable<AnalyticsResponsePayload>>
+                (
+                    "Analytics hit(s) found.", resultConverted
+                )
+            );
         }
     }
 }

@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using ViajaNet.JobApplication.Application.Core;
 
 namespace ViajaNet.JobApplication.Host.Api
 {

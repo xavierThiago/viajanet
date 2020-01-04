@@ -1,17 +1,17 @@
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
 
 namespace ViajaNet.JobApplication.Application.Core
 {
     /// <summary>
-    /// Create an instance of <see cref="AnalyticsPayload"/>.
+    /// Create an instance of <see cref="AnalyticsRequestPayload"/>.
     /// </summary>
     /// <remarks>Analytics API receives it as a payload.</remarks>
-    public class AnalyticsPayload : IValidatableObject
+    public class AnalyticsRequestPayload : IValidatableObject
     {
         /// <summary>
         /// Client IP.
@@ -34,7 +34,7 @@ namespace ViajaNet.JobApplication.Application.Core
         /// <value>Contains browser's name and version.</value>
         [Required]
         [JsonProperty("vendor")]
-        public VendorPayload Vendor { get; set; }
+        public VendorRequestPayload Vendor { get; set; }
 
         /// <summary>
         /// Client parameters
@@ -44,11 +44,11 @@ namespace ViajaNet.JobApplication.Application.Core
         public Dictionary<string, List<string>> Parameters { get; set; }
 
         /// <summary>
-        /// Create an instance of <see cref="AnalyticsPayload"/>, with a <paramref name="pageName"/> and <paramref name="vendor"/>.
+        /// Create an instance of <see cref="AnalyticsRequestPayload"/>, with a <paramref name="pageName"/> and <paramref name="vendor"/>.
         /// </summary>
         /// <param name="pageName">Page name.</param>
         /// <param name="vendor">Browser information.</param>
-        public AnalyticsPayload(string pageName, VendorPayload vendor,
+        public AnalyticsRequestPayload(string pageName, VendorRequestPayload vendor,
                                                     Dictionary<string, List<string>> parameters)
         {
             this.PageName = pageName;
@@ -57,7 +57,7 @@ namespace ViajaNet.JobApplication.Application.Core
         }
 
         /// <summary>
-        /// Adds an IP address to this <see cref="AnalyticsPayload"/> instance.
+        /// Adds an IP address to this <see cref="AnalyticsRequestPayload"/> instance.
         /// </summary>
         /// <param name="ip">IP address expressed as <see cref="string"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="ip"/> is null.</exception>
@@ -79,7 +79,7 @@ namespace ViajaNet.JobApplication.Application.Core
         }
 
         /// <summary>
-        /// Adds an IP address to this <see cref="AnalyticsPayload"/> instance.
+        /// Adds an IP address to this <see cref="AnalyticsRequestPayload"/> instance.
         /// </summary>
         /// <param name="ipAddress">IP address expressed as <see cref="IPAddress"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="ipAddress"/> is null.</exception>
@@ -103,10 +103,10 @@ namespace ViajaNet.JobApplication.Application.Core
         }
 
         /// <summary>
-        /// Create an instance of <see cref="VendorPayload"/>.
+        /// Create an instance of <see cref="VendorRequestPayload"/>.
         /// </summary>
         /// <remarks>Vendor information inside analytics payload.</remarks>
-        public class VendorPayload
+        public class VendorRequestPayload
         {
             private static readonly Regex _versionPattern = new Regex(@"^\d(?:\.\d+)+(\w+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
@@ -122,15 +122,16 @@ namespace ViajaNet.JobApplication.Application.Core
             /// Version.
             /// </summary>
             /// <value>Browser version.</value>
+            [Required]
             [JsonProperty("version")]
             public string Version { get; set; }
 
             /// <summary>
-            /// Create an instance of <see cref="VendorPayload"/> with a <paramref name="name"/> and <paramref name="version"/>.
+            /// Create an instance of <see cref="VendorRequestPayload"/> with a <paramref name="name"/> and <paramref name="version"/>.
             /// </summary>
             /// <param name="name">Browser name.</param>
             /// <param name="version">Browser version.</param>
-            public VendorPayload(string name, string version)
+            public VendorRequestPayload(string name, string version)
             {
                 if (name == null)
                 {
@@ -143,7 +144,7 @@ namespace ViajaNet.JobApplication.Application.Core
                 }
 
                 if (version != null && version.Length != 0 &&
-                    VendorPayload._versionPattern.Match(version).Success)
+                    VendorRequestPayload._versionPattern.Match(version).Success)
                 {
                     throw new ArgumentException($"Name can not be empty.", nameof(name));
                 }
