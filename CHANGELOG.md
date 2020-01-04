@@ -6,18 +6,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.0] - 2020-01-03
+### Added
+- Entity framework (SqlServer) simple structure;
+- Analytics entity that will be persisted;
+- Several convenience methods to convert payload, DTO and entity back and forth;
+- SqlServer DI on container;
+- .nuspec in SqlServer and CouchDb projects;
+- SqlServer connection string.
+
+### Fixed
+- Lack of id property in AnalyticsDto;
+
 ## [0.8.0] - 2020-01-03
 ### Added
 - Repository handler that supports commands and queries;
-- Added configuration data on appSettings.json.
+- Added configuration data in appSettings.json.
 
 ### Fixed
-- CouchDbConfiguration error on connection string;
+- CouchDbConfiguration error in connection string property;
 
 ## [0.7.0] - 2020-01-03
 ### Added
 - CouchDb factory and service implementation;
-- Added configuration data on appSettings.json.
+- Added configuration data in appSettings.json.
 
 ### Changed
 - Refactored providers and services to supress garbage collector on disposal.
@@ -25,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.6.0] - 2020-01-03
 ### Added
 - Controller's application service dependency injection;
-- Queue configuration on API appSettings.js.
+- Queue configuration in API appSettings.js.
 
 ### Changed
 - Simplified queue provider factory dispose method.
@@ -65,25 +77,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Swagger generation tool;
 - Added ViajaNet's logo;
-- Added some Swagger metadada on analytics controller.
+- Added some Swagger metadada in analytics controller.
 
 ### Fixed
 - .nuspec icon not being generated correctly;
-- Typo on vn-analytics.js API address.
+- Typo in vn-analytics.js API address.
 
 ## [0.1.0] - 2020-01-02
 ### Added
 - Debug profile to console project (Worker);
 - License.txt to be compatible with NuGet packaging;
 - .nuspec of queue infrastructure (it can be packable and referenced through NuGet);
-- Some configuration on appSettings.json;
+- Some configuration in appSettings.json;
 - Queue consumption job implementation;
 - Primitive DI container implementation (will be transported in a separated file later);
 - Created an interface to the queue factory (dependency injection);
 
 ### Changed
 - Queue service class no longer receives a channel from DI container. Now, it will be constructed with each new instance;
-- Better format (markdown) on API resources descriptions (request/response).
+- Better format (markdown) in API resources descriptions (request/response).
 
 ## [0.0.18] - 2020-01-01
 ### Added
@@ -113,7 +125,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.15] - 2019-12-30
 ### Changed
-- Also deleting dist folder on Makefile's "dist" and "purge" rules.
+- Also deleting dist folder in Makefile's "dist" and "purge" rules.
 
 ### Fixed
 - Main .css file path;
@@ -173,17 +185,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.7] - 2019-12-28
 ### Changed
-- Some enhancements on analytics script.
+- Some enhancements in analytics script.
 
 ## [0.0.6] - 2019-12-28
 ### Added
-- JSHint directives on vn.analytics.js.
+- JSHint directives in vn.analytics.js.
 
 ### Changed
 - Analytics script now has Apache (version 2.0) licensing.
 
 ### Fixed
-- Unused wrapper variable on vn-analytics.js.
+- Unused wrapper variable in vn-analytics.js.
 
 ## [0.0.5] - 2019-12-28
 ### Added
@@ -196,9 +208,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Remaining HTML pages (backbone);
 - Unit tests for AnalyticsPayload class;
-- CORS configuration on Startup;
+- CORS configuration at Startup;
 - RESTful documentation scratches;
-- API call on main front-end script.
+- API call in main front-end script.
 
 ### Changed
 - Decreased code coverage threshold to 50% and changed analysis method to "method";
@@ -223,7 +235,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Makefile's rule commenting typo.
 
 ### Fixed
-- Project name on SonarQube.
+- Project name in SonarQube's makefile rule.
 
 ## [0.0.1] - 2019-12-25
 ### Added

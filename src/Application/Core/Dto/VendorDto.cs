@@ -13,6 +13,14 @@ namespace ViajaNet.JobApplication.Application.Core
 
         public VendorDto(string name, string version)
         {
+            ValidateInput(name, version);
+
+            this.Name = name;
+            this.Version = version;
+        }
+
+        private static void ValidateInput(string name, string version)
+        {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -23,8 +31,15 @@ namespace ViajaNet.JobApplication.Application.Core
                 throw new ArgumentNullException(nameof(version));
             }
 
-            this.Name = name;
-            this.Version = version;
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Name can not be empty.", nameof(name));
+            }
+
+            if (version.Length == 0)
+            {
+                throw new ArgumentException("Version can not be empty.", nameof(version));
+            }
         }
 
         public static VendorDto FromPayload(AnalyticsPayload.VendorPayload vendorPayload)
@@ -33,6 +48,8 @@ namespace ViajaNet.JobApplication.Application.Core
             {
                 throw new ArgumentNullException(nameof(vendorPayload));
             }
+
+            ValidateInput(vendorPayload.Name, vendorPayload.Version);
 
             return new VendorDto(vendorPayload.Name, vendorPayload.Version);
         }

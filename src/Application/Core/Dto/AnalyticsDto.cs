@@ -6,6 +6,9 @@ namespace ViajaNet.JobApplication.Application.Core
 {
     public class AnalyticsDto
     {
+        [JsonProperty("Id")]
+        public string Id { get; private set; }
+
         [JsonProperty("ip")]
         public string IP { get; private set; }
 
@@ -20,6 +23,23 @@ namespace ViajaNet.JobApplication.Application.Core
 
         public AnalyticsDto(string ip, string pageName, VendorDto vendor, Dictionary<string, List<string>> parameters)
         {
+            if (vendor == null)
+            {
+                throw new ArgumentNullException(nameof(vendor));
+            }
+
+            ValidateInput(ip, pageName, vendor.Name,
+                            vendor.Version);
+
+            this.IP = ip;
+            this.PageName = pageName;
+            this.Vendor = vendor;
+            this.Parameters = parameters;
+        }
+
+        private static void ValidateInput(string ip, string pageName,
+                                            string vendorName, string vendorVersion)
+        {
             if (ip == null)
             {
                 throw new ArgumentNullException(nameof(ip));
@@ -27,23 +47,38 @@ namespace ViajaNet.JobApplication.Application.Core
 
             if (pageName == null)
             {
-                throw new ArgumentNullException(nameof(pageName));
+                throw new ArgumentNullException(nameof(ip));
             }
 
-            if (vendor == null)
+            if (vendorName == null)
             {
-                throw new ArgumentNullException(nameof(vendor));
+                throw new ArgumentNullException(nameof(ip));
             }
 
-            if (parameters == null)
+            if (vendorVersion == null)
             {
-                throw new ArgumentNullException(nameof(parameters));
+                throw new ArgumentNullException(nameof(ip));
             }
 
-            IP = ip;
-            PageName = pageName;
-            Vendor = vendor;
-            Parameters = parameters;
+            if (ip.Length == 0)
+            {
+                throw new ArgumentException("IP can not be empty.", nameof(ip));
+            }
+
+            if (pageName.Length == 0)
+            {
+                throw new ArgumentException("Page name can not be empty.", nameof(ip));
+            }
+
+            if (vendorName.Length == 0)
+            {
+                throw new ArgumentException("Vendor name can not be empty.", nameof(ip));
+            }
+
+            if (vendorVersion.Length == 0)
+            {
+                throw new ArgumentException("Vendor version can not be empty.", nameof(ip));
+            }
         }
 
         public static AnalyticsDto FromPayload(AnalyticsPayload analyticsPayload)
@@ -53,9 +88,19 @@ namespace ViajaNet.JobApplication.Application.Core
                 throw new ArgumentNullException(nameof(analyticsPayload));
             }
 
+            ValidateInput(analyticsPayload.IP, analyticsPayload.PageName,
+                            analyticsPayload.Vendor.Name, analyticsPayload.Vendor.Version);
+
             return new AnalyticsDto(analyticsPayload.IP, analyticsPayload.PageName,
                                         VendorDto.FromPayload(analyticsPayload.Vendor),
                                             analyticsPayload.Parameters);
+        }
+
+        public AnalyticsEntity ToEntity()
+        {
+            return new AnalyticsEntity(this.IP, this.PageName,
+                                        this.Vendor.Name, this.Vendor.Version,
+                                            this.Parameters);
         }
     }
 }

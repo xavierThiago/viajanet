@@ -1,9 +1,12 @@
 ﻿using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ViajaNet.JobApplication.Application.Core;
 using ViajaNet.JobApplication.Infrastructure;
 using ViajaNet.JobApplication.Infrastructure.CouchDb;
 using ViajaNet.JobApplication.Infrastructure.Queue;
+using Microsoft.EntityFrameworkCore;
+using ViajaNet.JobApplication.Infrastructure.SqlServer;
 
 namespace ViajaNet.JobApplication.Extensions
 {
@@ -11,7 +14,6 @@ namespace ViajaNet.JobApplication.Extensions
     {
         private const string QueueConfigurationSection = "PubSub:RabbitMq";
         private const string CouchDbConfigurationSection = "Repository:CouchDb";
-        private const string SqlServerConfigurationSection = "Repository:SqlServer";
 
         public static IServiceCollection AddViajaNetProviders(this IServiceCollection services)
         {
@@ -47,7 +49,7 @@ namespace ViajaNet.JobApplication.Extensions
                 .Configure<CouchDbConfiguration>(options => configuration.GetSection(CouchDbConfigurationSection).Bind(options))
                 .AddSingleton<ICouchDbFactory, CouchDbFactory>()
                 .AddTransient<ICouchDbService, CouchDbService>()
-                // .AddTransient<ISqlServerService, object>()
+                .AddDbContext<AnalyticsContext>(options => options.UseSqlServer(configuration.GetConnectionString("SqlServer")))
                 .AddSingleton<IRepositoryCommand, RepositoryHandler>()
                 .AddSingleton<IRepositoryQuery, RepositoryHandler>();
         }

@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViajaNet.JobApplication.Inf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViajaNet.JobApplication.Infrastructure", "src\Infrastructure\Handler\ViajaNet.JobApplication.Infrastructure.csproj", "{CFD83421-B385-4117-B0CB-4936AAEAFDE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViajaNet.JobApplication.Infrastructure.SqlServer", "src\Infrastructure\SqlServer\ViajaNet.JobApplication.Infrastructure.SqlServer.csproj", "{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,6 +152,18 @@ Global
 		{CFD83421-B385-4117-B0CB-4936AAEAFDE5}.Release|x64.Build.0 = Release|Any CPU
 		{CFD83421-B385-4117-B0CB-4936AAEAFDE5}.Release|x86.ActiveCfg = Release|Any CPU
 		{CFD83421-B385-4117-B0CB-4936AAEAFDE5}.Release|x86.Build.0 = Release|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Debug|x64.Build.0 = Debug|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Debug|x86.Build.0 = Debug|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Release|x64.ActiveCfg = Release|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Release|x64.Build.0 = Release|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Release|x86.ActiveCfg = Release|Any CPU
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8E91C1EE-4E07-4002-8621-F186BB414ABA} = {EC6105F0-286D-49DE-A4C9-2668C8BB83D6}
@@ -164,5 +178,6 @@ Global
 		{B5D03E56-15C0-47E7-8F4E-1B7564F79B66} = {EE2894EF-BB93-4E4C-9B07-91063E44947D}
 		{45AC0B3C-72A0-4886-9366-1274935C5105} = {9443A500-EB60-4A8F-B98A-92D0AA031308}
 		{CFD83421-B385-4117-B0CB-4936AAEAFDE5} = {9443A500-EB60-4A8F-B98A-92D0AA031308}
+		{5A70DD25-E12B-49E9-8AE3-8FC3D8858FDF} = {9443A500-EB60-4A8F-B98A-92D0AA031308}
 	EndGlobalSection
 EndGlobal
