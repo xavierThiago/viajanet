@@ -1,6 +1,6 @@
-# Project Title
+# ViajaNet's Fullstack Developer Job Application Project
 
-ViajaNet's senior fullstack developer job application project. A simple analytics API, that sends hits to the server, composed of a RabbitMQ pub/sub mechanism consumed by two databases, SqlServer and CouchDb, at regular intervals intervals.
+A simple analytics API, that sends hits to the server, composed of a RabbitMQ pub/sub mechanism consumed by two databases, SqlServer and CouchDb, at regular intervals.
 
 ## Getting Started
 
