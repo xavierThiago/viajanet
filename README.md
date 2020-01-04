@@ -48,16 +48,22 @@ docker run -d -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=just-testing' -p 1433:1433 -d m
 
 ## Running the tests
 
-There are simple back-end tests made with XUnit. You can run then on command line
+There are simple back-end tests made with XUnit. You can simply run a command line:
 
 ```
 dotnet test
 ```
 
-You can also collect code coverage information (at least 50%) running this command, instead:
+Collecting code coverage information (at least 50%) is just as easy, running this command, instead:
 
 ```
 dotnet test /p:CollectCoverage=true /p:Threshold=50 /p:ThresholdType=method /p:CoverletOutputFormat=opencover
+```
+
+Also, you can use makefile rules of this project. Be aware that these rules only work on Linux and macOS systems:
+
+```
+make cbt
 ```
 
 ## Deployment

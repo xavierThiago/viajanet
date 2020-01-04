@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.0] - 2020-01-04
+### Added
+- Makefile use instruction on README.md.
+
 ## [0.14.0] - 2020-01-04
 ### Added
 - Docker instructions on README.md;
