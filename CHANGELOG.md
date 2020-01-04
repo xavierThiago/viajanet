@@ -6,9 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.1] - 2020-01-04
+### Fixed
+- This changelog.
+
 ## [0.11.0] - 2020-01-04
 ### Added
-- SqlServer service layer.
+- SqlServer service layer;
+- CouchDb implementation.
 
 ### Fixed
 - Repository handler contracts.
