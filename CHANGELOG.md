@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0] - 2020-01-04
+### Added
+- Project and repository information to the community.
+
+## [0.12.0] - 2020-01-04
+### Changed
+- API resource documentation.
+
 ## [0.11.2] - 2020-01-04
 ### Fixed
 - Again id type on several layers.
