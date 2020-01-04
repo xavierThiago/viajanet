@@ -18,8 +18,8 @@ rebuild:
 	@dotnet build -p:maxcpucount=5 -v q > /dev/null
 	@echo Done.
 
-# Minimum line code coverage threshold of 90% (changeable from parameter).
-threshold ?= 50
+# Minimum line code coverage threshold of 0% (changeable from parameter).
+threshold ?= 0
 cbt: rebuild
 	@printf "\nTesting...\n\n"
 	@dotnet test -v q --no-build /p:CollectCoverage=true /p:Threshold=${threshold} /p:ThresholdType=method /p:CoverletOutputFormat=opencover
@@ -38,8 +38,13 @@ pack: cbt
 	@rm -drf ./dist/nupkg
 	@echo Done.
 	@printf "\nPacking...\n\n"
-	@dotnet pack -c Release --no-build -o ../../../dist/nupkg -v q
+	@dotnet pack -c Release --no-build -o ./dist/nupkg -v q
 	@echo Done.
+
+nuget: pack
+	@echo Publishing to GitHub...
+	@dotnet nuget push ./dist/nupkg/*.nupkg --source github
+	@Done.
 
 purge:
 	@echo Purging dist, bin and obj folders...

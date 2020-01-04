@@ -72,7 +72,7 @@ For now, deployment is not ready. In the future, a GitHub Action will be createa
 
 ## Built With
 
-* [.NET Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2) - Back-end language
+* [.NET Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2) - Cross-platform .NET implementation for websites, servers, and console apps on Windows, Linux, and macOS.
 * [NPM](https://www.npmjs.com/) - Dependency Management
 * [GruntJs](https://gruntjs.com/) - Task management
 * [Docker](https://www.docker.com/) - Build containerized apps
