@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.2] - 2020-01-04
+### Fixed
+- Typo on README.md.
+
 ## [0.13.1] - 2020-01-04
 ### Fixed
 - Typo on README.md.
