@@ -100,4 +100,4 @@ This project is licensed under the Apache License, Version 2.0 - see the [LICENS
 
 ## Acknowledgments
 
-* Althought not much used on this project, I'd like to thanks [Rafael Cruzeiro](https://github.com/rcruzeiro) for inspiring me on DDD development.
+* Although not much used on this project, I'd like to thanks [Rafael Cruzeiro](https://github.com/rcruzeiro) for inspiring me on DDD development.
