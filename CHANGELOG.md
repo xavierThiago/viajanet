@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.3] - 2020-01-08
+### Fixed
+- Typo in README file.
+
 ## [0.17.2] - 2020-01-08
 ### Fixed
 - Font size of a specific section in the README file.
