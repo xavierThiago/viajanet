@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        title ViajaNet - Job Application - Checkout
+
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh",
+            crossorigin="anonymous")
+    body
+        if debug
+            script(src="js/viajanet-job-application.js", async)
+        else if debug-bundle
+            script(src="js/bundles/viajanet-job-application.js", async)
+        else
+            script(src="js/bundles/viajanet-job-application.min.js", async)
