@@ -67,7 +67,7 @@ You can also use all makefile rules of this project. Be aware that these rules o
 make cbt
 ```
 
-### API Documentation
+#### API Documentation
 
 The Analytics API's documentation (OpenAPI Specification, implemented with Swagger UI) can be seen by starting the ASP.NET Core API, that, by default, it's binded at the address **localhost:5000/swagger**.
 
