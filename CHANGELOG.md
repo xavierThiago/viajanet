@@ -6,7 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.17.0] - 2020-01-04
+## [0.17.1] - 2020-01-08
+### Fixed
+- Missing API documentation info.
+
+## [0.17.0] - 2020-01-08
 ### Added
 - New Grunt task for release profile.
 
