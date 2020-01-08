@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0] - 2020-01-04
+### Added
+- New Grunt task for release profile.
+
+### Changed
+- Converted all .html assets to .pug files (conversion through Grunt tasks);
+- Renamed .js file to match package id (NPM).
+
+### Fixed
+- Debug Grunt "debug" task.
+
 ## [0.16.0] - 2020-01-04
 ### Added
 - nuget.config to push packages to GitHub.

@@ -24,10 +24,11 @@ To prepare your local machine there are just **four** steps:
 npm install
 ```
 
-2. Run GruntJs tasks to perform HTML, CSS and JS bundling to your local **/dist** folder:
+2. Run GruntJs tasks to perform HTML, CSS and JS compiling and bundling to your local **/dist** folder:
 
 ```
-grunt dist
+grunt build:debug
+grunt build:release
 ```
 
 3. And, finnally, you can build your project with .NET Core SDK:
@@ -74,7 +75,7 @@ For now, deployment is not ready. In the future, a GitHub Action will be createa
 
 * [.NET Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2) - Cross-platform .NET implementation for websites, servers, and console apps on Windows, Linux, and macOS.
 * [NPM](https://www.npmjs.com/) - Dependency Management
-* [GruntJs](https://gruntjs.com/) - Task management
+* [GRUNT](https://gruntjs.com/) - Task management
 * [Docker](https://www.docker.com/) - Build containerized apps
 
 ## Contributing
